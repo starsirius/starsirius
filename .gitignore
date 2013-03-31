@@ -1,0 +1,22 @@
+# Python
+*.pyc
+*.pyo
+/__pycache__/
+starenv
+
+# Ruby
+Gemfile.lock
+
+# Temp Files
+*.orig
+*~
+.*.swp
+.*.swo
+*.tmp
+*.bak
+
+# OS X
+.DS_Store
+
+# Logging
+*.log

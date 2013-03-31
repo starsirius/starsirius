@@ -1,0 +1,103 @@
+starsirius - Chung-Yi Chi's personal website
+============================================
+
+starsirius is Chung-Yi Chi's id on PTT (PTT Bulletin Board System, telnet://ptt.cc) as well as the permanent name of his personal website.
+
+The following Quality Attributes and Tradeoffs hold:
+
+* user latency/load > rapid development > interactive development > SEO adaptibility > rich client abilities > automated deployment
+* All pages must load within 1.5 seconds
+* All pages must be vetted by Heuristics and UI/UX Criteria
+* All actions/operations need to be captured with Cucumber
+* The production site will have a Google PageSpeed score of 90 or higher
+
+Code follows the core practices of The Art of Readable Code
+
+The architecture makes guarantees of:
+* security > stateless > SOLID > data integrity > scaling > streaming
+* Dependency Inversion - changes in lower-levels doesn't affect higher levels
+* Loosely coupled, Highly cohesive
+* Data-centric; low-latency or async data marshaling
+* Program to a thin, clearly defined interface... never a concrete class/implementation
+* Liskov substitution principle
+* Modules are open for extension, but closed for modification
+* The web application and data responsiblities are strongly decoupled
+* Async at a macro level
+
+## Usage and Examples
+TODO
+
+## Installation for development
+
+### Install dependencies
+TODO
+
+### Install virtual env, required Python packages, and star app
+```bash
+sh mk_env.sh
+```
+
+## Notes
+
+### We followed the steps below to build the site
+
+* Drop in initial MVC files organized in folders
+```
+resource/       # Change the default template and static folder path, need to modify the app config.
+    templates/
+    partials/
+    static/
+src/
+    star/
+        setup.py    # For setuptools to make a package
+        development.ini
+        star/
+            __init__.py
+            server.py
+            views/
+            models/
+            lib/
+            controllers/
+```
+
+* Create the mk_env.sh script that will make the virtualenv, install requirements and the project. It will run the following steps:
+
+    1. Install virtualenv
+
+        ```
+        sudo pip install virtualenv
+        ```
+
+        See the official [Flask documentation](http://flask.pocoo.org/docs/installation/#virtualenv "Virtual environment") for more information of virtual environment.
+
+    2. Create a virtual environment named starenv
+
+        ```
+        virtualenv starenv
+        ```
+
+    3. Activate the virtualenv and install requirements
+
+        ```
+        source starenv/bin/activate
+        pip install -r requirements.txt
+        ```
+
+    4. Install the project egg as a "develop egg"
+
+        We use setuptools to make a package. Make sure the setup.py is configured correctly. See an [example](http://parijatmishra.wordpress.com/2008/10/08/python-packaging-setuptools-and-eggs/ "An example of using python setuptools").
+
+        ```
+        cd src/star
+        python setup.py develop
+        ```
+
+* Drop in HTML5 Boilerplate templates for HTML templates
+
+    See the official [HTML5 Boilerplate website](http://html5boilerplate.com/ "HTML5 Boilerplate") for more information.
+
+## Change log
+TODO
+
+## License
+TODO

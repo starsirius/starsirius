@@ -1,10 +1,11 @@
 from flask.ext.script import Manager, Shell
-from star import app, config_app, connect_controllers
+from star import app, config_app, connect_controllers, connect_db
 from star import controllers, views
 
 def hookup_app(config_file="development.ini", relative_to="../"):
     app = config_app(config_file=config_file, relative_to=relative_to)
     connect_controllers()
+    connect_db()
     return app
 
 def _make_context():

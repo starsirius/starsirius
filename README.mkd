@@ -30,7 +30,18 @@ TODO
 ## Installation for development
 
 ### Install dependencies
-TODO
+#### PostgreSQL
+On OSX Mountain Lion, get Homebrew and do:
+
+```bash
+brew install postgres
+```
+
+Run the script to create, start and stop the users database:
+
+```bash
+cd data && sh mk_db.sh
+```
 
 ### Install virtual env, required Python packages, and star app
 ```bash

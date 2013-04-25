@@ -107,6 +107,12 @@ src/
 
     See the official [HTML5 Boilerplate website](http://html5boilerplate.com/ "HTML5 Boilerplate") for more information.
 
+* Set up postgres database, Flask-SQLAlchemy, SQLAlchemy, and psycopg2 driver. Write SQLAlchemy model classes.
+
+* Set up database migrate environment with alembic
+
+   See the official [alembic tutorial](http://alembic.readthedocs.org/en/latest/tutorial.html) for more information.
+
 ## Change log
 TODO
 

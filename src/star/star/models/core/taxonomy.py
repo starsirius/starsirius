@@ -10,9 +10,9 @@ class Term(db.Model):
 
 class TaxonomyTerm(db.Model):
     __tablename__ = 'taxonomy_term'
-    term_id =       db.Column(db.Integer, db.ForeignKey('term.id'), primary_key=True)
-    taxonomy_id =   db.Column(db.Integer, db.ForeignKey('taxonomy.id'), primary_key=True)
-    term =          db.relationship('Term', backref="taxonomy_term")
+    term_id =       db.Column(db.Integer, db.ForeignKey('term.id', ondelete='CASCADE'), primary_key=True)
+    taxonomy_id =   db.Column(db.Integer, db.ForeignKey('taxonomy.id', ondelete='CASCADE'), primary_key=True)
+    term =          db.relationship('Term', backref=db.backref("taxonomy_term", passive_deletes=True))
     description =   db.Column(db.Unicode(10000), nullable=False)
     parent =        db.Column(db.Integer, nullable=False, default=0)
     count =         db.Column(db.Integer, nullable=False, default=0)
@@ -22,5 +22,5 @@ class Taxonomy(db.Model):
     __tablename__ = 'taxonomy'
     id =        db.Column(db.Integer, db.Sequence('taxonomy_seq_id', optional=True), primary_key=True)
     name =      db.Column(db.Unicode(149), nullable=False, unique=True)
-    terms =     db.relationship('TaxonomyTerm', backref="taxonomy")
+    terms =     db.relationship('TaxonomyTerm', backref="taxonomy", passive_deletes=True)
     created =   db.Column(db.DateTime, nullable=False, default=now)

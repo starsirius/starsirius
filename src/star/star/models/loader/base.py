@@ -2,6 +2,9 @@ from star import db
 from star.models.core import taxonomy as taxonomy_model
 
 def init_data():
+    db.drop_all()
+    db.create_all()
+
     terms = [u"User Experience", u"Human-Computer Interaction", u"Heuristic Evaluation"]
     for term in terms:
         t = taxonomy_model.Term(name=term)
@@ -32,4 +35,12 @@ def init_data():
     tt.taxonomy_id = taxonomy_category.id
     db.session.add(tt)
     db.session.flush()
+    db.session.commit()
+
+    #tax_tag = taxonomy_model.Taxonomy.query.filter_by(id=1).first()
+    #db.session.delete(tax_tag)
+    #db.session.commit()
+
+    term_tag = taxonomy_model.Term.query.filter_by(id=1).first()
+    db.session.delete(term_tag)
     db.session.commit()

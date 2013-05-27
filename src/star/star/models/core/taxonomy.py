@@ -15,7 +15,6 @@ class TaxonomyTerm(db.Model):
     term =          db.relationship('Term', backref=db.backref("taxonomy_term", passive_deletes=True))
     description =   db.Column(db.Unicode(10000), nullable=False)
     parent =        db.Column(db.Integer, nullable=False, default=0)
-    count =         db.Column(db.Integer, nullable=False, default=0)
     created =       db.Column(db.DateTime, nullable=False, default=now)
 
 class Taxonomy(db.Model):

@@ -1,4 +1,5 @@
 from star import db
+from star.models import db_add
 from star.model.core import post as post_model
 
 """
@@ -81,6 +82,49 @@ class PostPrivateDAL(object):
     ###
     # CREATE
     ############
+
+    @staticmoethod
+    def createPost(author_id, title, excerpt, content, status, comment_status, password, slug):
+        """
+        """
+        post = post_model.Post()
+        post.author_id = author_id
+        post.title = title
+        post.excerpt = excerpt
+        post.content = content
+        post.status = status
+        post.comment_status = comment_status
+        post.password = password
+        post.slug = slug
+        return post
+
+    @staticmethod
+    def addPost(author_id, title, excerpt, content, status, comment_status, password, slug):
+        """
+        """
+        post = PostPrivateDAL.createPost(author_id, title, excerpt, content, status, comment_status, password, slug)
+        return db_add(post)
+
+    @staticmethod
+    def addTaxonomyTermToPost(post_id_or_obj, taxonomy_term):
+        """
+        Add a taxonomy_term to a post
+        Arguments:
+            post_id_or_obj - a Post or int, the Post or ID of the post
+            taxonomy_term - a Taxonomy_Term object, the taxonomy_term you're adding to a post
+        Returns:
+            taxonomy_term - the taxonomy_term successfully added to the post
+                                None if unsuccessful
+        Notes:
+            If DB commit fails, this will throw an exception
+        """
+        post = isinstance(post_id_or_obj, post_model.Post) and post_id_or_obj or PostPrivateDAL.getPostByPostID(post_id_or_obj)
+        if not post:
+            return None
+        post.taxonomy_terms.append(taxonomy_term)
+        db.session.flush()
+        db.session.commit()
+        return taxonomy_term
 
     ###
     # UPDATE

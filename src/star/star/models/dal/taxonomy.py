@@ -1,6 +1,6 @@
 from star import db
 from star.models import db_add
-from star.model.core import taxonomy as taxonomy_model
+from star.models.core import taxonomy as taxonomy_model
 
 """
 This is the user data access layer.
@@ -60,7 +60,7 @@ class TaxonomyPrivateDAL(object):
         """
         if not isinstance(term_id, int):
             raise TypeError("term_id must be an int")
-        term_query = term_model.Term.query
+        term_query = taxonomy_model.Term.query
         ret_term = term_query.get(term_id)
         return ret_term
 
@@ -122,6 +122,43 @@ class TaxonomyPrivateDAL(object):
         """
         term = TaxonomyPrivateDAL.createTerm(name)
         return db_add(term)
+
+    @staticmethod
+    def createTaxonomy(name):
+        """
+        """
+        taxonomy = taxonomy_model.Taxonomy()
+        taxonomy.name = name
+        return taxonomy
+
+    @staticmethod
+    def addTaxonomy(name):
+        """
+        """
+        taxonomy = TaxonomyPrivateDAL.createTaxonomy(name)
+        return db_add(taxonomy)
+
+    @staticmethod
+    def addTermToTaxonomy(term, taxonomy, description=None, parent_id=0):
+        """
+        Add a Term to a Taxonomy by creating and adding a TaxonomyTerm to the DB
+        Arguments:
+            term - a Term object, the term you want to add to the taxonomy
+            taxonomy - a Taxonomy object, the taxonomy you want to add the term to
+            description - a unicode string, the description of the term in the context
+            [parent_id] - an integer, the id of the parent TaxonomyTerm object
+        Returns:
+            taxonomy - the Taxonomy object with the newly added TaxonomyTerm
+        """
+        taxonomy_term = taxonomy_model.TaxonomyTerm()
+        taxonomy_term.term_id = term.id
+        taxonomy_term.taxonomy_id = taxonomy.id
+        if not description:
+            description = term.name + " " + taxonomy.name
+        taxonomy_term.description = description
+        taxonomy_term.parent_id = parent_id
+        db_add(taxonomy_term)
+        return taxonomy
 
     ###
     # UPDATE

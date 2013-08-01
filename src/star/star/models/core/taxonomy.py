@@ -20,7 +20,7 @@ class TaxonomyTerm(db.Model):
     taxonomy_id =   db.Column(db.Integer, db.ForeignKey('taxonomy.id', ondelete='CASCADE'), primary_key=True)
     term =          db.relationship('Term', backref=db.backref("taxonomy_term", passive_deletes=True))
     description =   db.Column(db.Unicode(10000), nullable=False)
-    parent =        db.Column(db.Integer, nullable=False, default=0)
+    parent_id =     db.Column(db.Integer, nullable=False, default=0)
     created =       db.Column(db.DateTime, nullable=False, default=now)
 
 class Taxonomy(db.Model):

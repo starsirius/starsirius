@@ -1,5 +1,18 @@
 from star import db
+from star.models.dal.taxonomy import TaxonomyPrivateDAL
 from star.models.core import taxonomy as taxonomy_model
+
+def init_data_dal():
+    db.drop_all()
+    db.create_all()
+    TaxonomyPrivateDAL.addTerm(u'user experience')
+    TaxonomyPrivateDAL.addTerm(u'human-computer interaction')
+    TaxonomyPrivateDAL.addTaxonomy(u'tag')
+    TaxonomyPrivateDAL.addTaxonomy(u'category')
+
+    TaxonomyPrivateDAL.addTermToTaxonomy(
+            TaxonomyPrivateDAL.getTermByTermID(1), 
+            TaxonomyPrivateDAL.getTaxonomyByTaxonomyID(1))
 
 def init_data():
     db.drop_all()

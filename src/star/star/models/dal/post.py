@@ -1,6 +1,6 @@
 from star import db
 from star.models import db_add
-from star.model.core import post as post_model
+from star.models.core import post as post_model
 
 """
 This is the user data access layer.
@@ -83,7 +83,7 @@ class PostPrivateDAL(object):
     # CREATE
     ############
 
-    @staticmoethod
+    @staticmethod
     def createPost(author_id, title, excerpt, content, status, comment_status, password, slug):
         """
         """

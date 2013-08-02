@@ -9,7 +9,10 @@ from star.models.core.taxonomy import TaxonomyTerm
 post_taxonomy_term = db.Table('post_taxonomy_term',
     db.Column('id', db.Integer, db.Sequence('post_taxonomy_term_seq_id', optional=True), primary_key=True),
     db.Column('post_id', db.Integer, db.ForeignKey('post.id', deferrable=True, ondelete="CASCADE")),
-    db.Column('taxonomy_term_id', db.Integer, db.ForeignKey('taxonomy_term.id', deferrable=True, ondelete="CASCADE")),
+    #db.Column('taxonomy_term_id', db.Integer, db.ForeignKey('taxonomy_term.id', deferrable=True, ondelete="CASCADE")),
+    db.Column('term_id', db.Integer, nullable=False), 
+    db.Column('taxonomy_id', db.Integer, nullable=False), 
+    db.ForeignKeyConstraint(['term_id', 'taxonomy_id'], ['taxonomy_term.term_id', 'taxonomy_term.taxonomy_id'] ), 
     db.Column('created', db.DateTime, nullable=False, default=now), 
     extend_existing=True)
 

@@ -1,19 +1,69 @@
 from star import db
+from star.models.dal.user import UserPrivateDAL
 from star.models.dal.taxonomy import TaxonomyPrivateDAL
+from star.models.dal.post import PostPrivateDAL
 from star.models.core import taxonomy as taxonomy_model
+from star import flask_bcrypt
 
-def init_data_dal():
+def init_data():
+
+    ###
+    # RESET DB
+    ############
     db.drop_all()
     db.create_all()
-    TaxonomyPrivateDAL.addTerm(u'user experience')
-    TaxonomyPrivateDAL.addTerm(u'human-computer interaction')
-    TaxonomyPrivateDAL.addTaxonomy(u'tag')
-    TaxonomyPrivateDAL.addTaxonomy(u'category')
 
-    TaxonomyPrivateDAL.addTermToTaxonomy(
-            TaxonomyPrivateDAL.getTermByTermID(1), 
-            TaxonomyPrivateDAL.getTaxonomyByTaxonomyID(1))
+    ###
+    # USER
+    ############
+    user = UserPrivateDAL.addUser(
+            u"cychi1210@gmail.com", 
+            flask_bcrypt.generate_password_hash(u"password"), 
+            u"Chung-Yi", 
+            u"Chi")
+    role = UserPrivateDAL.addRole(u"admin")
+    UserPrivateDAL.addRoleToUser(role, user)
 
+    ###
+    # TAXONOMY
+    ############
+    tax_tag = TaxonomyPrivateDAL.addTaxonomy(u'tag')
+    tax_cat = TaxonomyPrivateDAL.addTaxonomy(u'category')
+
+    ###
+    # POST
+    ############
+    title = u"Post Title"
+    post = PostPrivateDAL.addPost(
+            user.id, 
+            title, 
+            u"Post excerpt", 
+            u"Post content", 
+            u"published", 
+            u"allowed", 
+            flask_bcrypt.generate_password_hash(u"password"), 
+            u"-".join(title.split()))
+
+    term_art = TaxonomyPrivateDAL.addTerm(u'Art')
+    term_life = TaxonomyPrivateDAL.addTerm(u'life')
+    TaxonomyPrivateDAL.addTermToTaxonomy(term_art, tax_tag)
+    TaxonomyPrivateDAL.addTermToTaxonomy(term_life, tax_tag)
+    TaxonomyPrivateDAL.addTermToTaxonomy(term_life, tax_cat)
+
+    PostPrivateDAL.addTaxonomyTermToPost(
+            post,
+            TaxonomyPrivateDAL.getTaxonomyTermByTaxonomyIDAndTermID(
+                tax_tag.id, term_art.id))
+    PostPrivateDAL.addTaxonomyTermToPost(
+            post,
+            TaxonomyPrivateDAL.getTaxonomyTermByTaxonomyIDAndTermID(
+                tax_tag.id, term_life.id))
+    PostPrivateDAL.addTaxonomyTermToPost(
+            post,
+            TaxonomyPrivateDAL.getTaxonomyTermByTaxonomyIDAndTermID(
+                tax_cat.id, term_life.id))
+
+"""
 def init_data():
     db.drop_all()
     db.create_all()
@@ -57,3 +107,4 @@ def init_data():
     term_tag = taxonomy_model.Term.query.filter_by(id=1).first()
     db.session.delete(term_tag)
     db.session.commit()
+"""

@@ -1,7 +1,8 @@
 Flask==0.9
 Flask-Script
-PasteDeploy==1.5.0
 Flask-SQLAlchemy
+Flask-Bcrypt
+PasteDeploy==1.5.0
 SQLAlchemy
 psycopg2
 alembic

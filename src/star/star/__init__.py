@@ -1,12 +1,14 @@
 from flask import Flask
 from paste.deploy import appconfig
 from flask.ext.sqlalchemy import SQLAlchemy
+from flaskext.bcrypt import Bcrypt
 import sys, os
 
 template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../resources')
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../resources/static')
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 db = SQLAlchemy(app)
+flask_bcrypt = Bcrypt(app)
 
 def config_app(app=app, config_file="development.ini", relative_to="../"):
     print "\n"

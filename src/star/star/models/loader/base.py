@@ -63,6 +63,14 @@ def init_data():
             TaxonomyPrivateDAL.getTaxonomyTermByTaxonomyIDAndTermID(
                 tax_cat.id, term_life.id))
 
+    ###
+    # Work
+    ############
+    work = PostPrivateDAL.addWork(
+            post.id, 
+            u"Post Subtitle", 
+            u"Post summary")
+
 """
 def init_data():
     db.drop_all()

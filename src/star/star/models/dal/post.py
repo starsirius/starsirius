@@ -37,6 +37,13 @@ class PostPublicDAL(object):
         ret_post = PostPrivateDAL.getPostByPostID(post_id)
         return ret_post
 
+    @staticmethod
+    def getWorkByWorkID(work_id):
+        """
+        """
+        ret_work = PostPrivateDAL.getWorkByWorkID(work_id)
+        return ret_work
+
     ###
     # CREATE
     ############
@@ -79,6 +86,16 @@ class PostPrivateDAL(object):
         ret_post = post_query.get(post_id)
         return ret_post
 
+    @staticmethod
+    def getWorkByWorkID(work_id):
+        """
+        """
+        if not isinstance(work_id, int):
+            raise TypeError("work_id must be an int")
+        work_query = post_model.Work.query
+        ret_work = work_query.get(work_id)
+        return ret_work
+
     ###
     # CREATE
     ############
@@ -104,6 +121,23 @@ class PostPrivateDAL(object):
         """
         post = PostPrivateDAL.createPost(author_id, title, excerpt, content, status, comment_status, password, slug)
         return db_add(post)
+
+    @staticmethod
+    def createWork(post_id, subtitle, summary, cover_image_url=None, meta_data=None):
+        work = post_model.Work()
+        work.post_id = post_id
+        work.subtitle = subtitle
+        work.summary = summary
+        work.cover_image_url = cover_image_url
+        work.meta_data = meta_data
+        return work
+
+    @staticmethod
+    def addWork(post_id, subtitle, summary, cover_image_url=None, meta_data=None):
+        """
+        """
+        work = PostPrivateDAL.createWork(post_id, subtitle, summary, cover_image_url, meta_data)
+        return db_add(work)
 
     @staticmethod
     def addTaxonomyTermToPost(post_id_or_obj, taxonomy_term):

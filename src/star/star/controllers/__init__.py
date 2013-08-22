@@ -1,2 +1,2 @@
 #
-__all__ = ['site', 'admin']
+__all__ = ['site', 'browse', 'post', 'admin']

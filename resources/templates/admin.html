@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    {% include 'partials/head.html.partial' %}
+</head>
+<body class="admin">
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+<header class="header-admin">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <a class="navbar-brand" href="#">STARSIRIUS Admin</a>
+        <ul class="nav navbar-nav">
+            <li><a href="#blog-panel" data-toggle="tab">Manage Blog</a></li>
+            <li><a href="#portfolio-panel" data-toggle="tab">Manage Portfolio</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="tab-content">
+    <div class="headline">
+        <h1>Admin Dashboard</h1>
+    </div>
+
+    <!-- Manage Blog -->
+    <div id="blog-panel" class="row tab-pane active">
+        <div class="col-lg-4">
+            <nav class="admin-sidebar">
+                <ul class="nav">
+                    <li><a href="#manage-posts" data-toggle="tab">Manage Posts</a></li>
+                    <li><a href="#new-post" data-toggle="tab">New Post</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-20 tab-content">
+            <section id="manage-posts" class="tab-pane active">
+                <h2>Manage Posts</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Post ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="new-post" class="tab-pane">
+                <h2>New Post</h2>
+                <div class="form">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="title" class="col-lg-2 control-label">Title</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Post Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="col-lg-2 control-label">Content</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="10" id="content" name="content"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-lg-2 control-label">Category</label>
+                            <div class="col-lg-10" id="category" name="category">
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag" class="col-lg-2 control-label">Tags</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag (separated by comma)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-default">Publish Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Manage Portfolio -->
+    <div id="portfolio-panel" class="row tab-pane">
+        <div class="col-lg-4">
+            <nav class="admin-sidebar">
+                <ul class="nav">
+                    <li><a href="#manage-works" data-toggle="tab">Manage Portfolio</a></li>
+                    <li><a href="#new-work" data-toggle="tab">New Work</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-20 tab-content">
+            <section id="manage-works" class="tab-pane active">
+                <h2>Manage Portfolio Works</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Post ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>The Accomplishments Essay</td>
+                            <td>Accomplishments essays are not about measuring your worth, but determining whether you act on your values.
+                            
+                                From Harvard’s infamous “What are your three most substantial accomplishments and why do you view them as such?” to Yale’s “What achievement are you most proud of and why?” accomplishments essays come in many shapes and sizes. Some are really obvious and some are incredibly elusive. The purpose of the accomplishment essay is not simply to show off. That’s one of the mistakes candidates make when answering this topic. Conversely, people also get into trouble thinking they have nothing to say. You don’t have to climb Mount Everest with one arm to have a great topic.
+                            
+                            At the end of the day, it’s all about the insight you show when writing about the accomplishment. What’s an accomplishment to me may not be an accomplishment to you, and that cuts to the heart of this question: What do you value?</td>
+                            <td>13:15pm Jun 8, 2013</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="new-work" class="tab-pane">
+                <h2>New Portfolio Work</h2>
+                <div class="form">
+                    <form class="form-horizontal" action="/work" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title" class="col-lg-2 control-label">Title</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Work Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subtitle" class="col-lg-2 control-label">Subtitle</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Work Subtitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="summary" class="col-lg-2 control-label">Summary</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="5" id="summary" name="summary"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="col-lg-2 control-label">Content</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="10" id="content" name="content" placeholder="HTML..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cover-image" class="col-lg-2 control-label">Cover image</label>
+                            <div class="col-lg-10">
+                                <input type="file" id="cover-image" name="cover-image">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="metadata" class="col-lg-2 control-label">Metadata</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="metadata" name="metadata" placeholder="Metadata (in JSON dictionary format)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-lg-2 control-label">Category</label>
+                            <div class="col-lg-10" id="category" name="category">
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag" class="col-lg-2 control-label">Tags</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag (separated by comma)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-default">Publish Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer-admin">
+    <nav class="navbar">
+        <ul class="nav navbar-nav">
+            <li><span class="copyright">&copy; 2010 - 2013 Chung-Yi Chi</span> <span> | </span></li>
+            <li><a href="#">Home</a> <span> | </span></li>
+            <li><a href="#">GitHub Project</a> <span> | </span></li>
+            <li><a href="#">Bootstrap</a> </li>
+        </ul>
+    </nav>
+</footer>
+
+{% include 'partials/js-libs.html.partial' %}
+
+<script>
+    /**
+     * File upload using AJAX. Refer to
+     * http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously-with-jquery
+     * https://developer.mozilla.org/en/using_files_from_web_applications
+     */
+    $('form').submit(function(e) {
+        e.preventDefault();
+
+        var $form = $(this), 
+            url = $form.attr('action'), 
+            formData = new FormData($form[0]);
+
+        console.log(formData);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            /*
+            xhr: function() {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload){ // Check if upload property exists
+                    myXhr.upload.addEventListener(
+                    'progress', progressHandlingFunction, false); // For handling the progress of the upload
+                }
+                return myXhr;
+            },
+            */
+            beforeSend: function(data) {},
+            success: function(data) {
+                console.log("Form submission via AJAX succeeded.");
+                if (data.status == 200) {
+                    console.log("Work creation succeeded.");
+                } else {
+                    console.log("Work creation failed.");
+                    console.log(data);
+                }
+            }
+            error: function(data) { console.log("Form submission via AJAX failed."); },
+            data: formData,
+            // Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>
+
+{% include 'partials/google-analytics.html.partial' %}
+
+</body>
+</html>

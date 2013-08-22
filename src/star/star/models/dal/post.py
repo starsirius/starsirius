@@ -96,6 +96,20 @@ class PostPrivateDAL(object):
         work_query = post_model.Work.query
         ret_work = work_query.get(work_id)
         return ret_work
+                    
+    @staticmethod
+    def getWorks(offset=0, limit=9):
+        """
+        Get a list of works
+        Arguments:
+            [offset] - an int, the offset of the works [0]
+            [limit] - an int, the limit of how many works to fetch, None to fetch ALL WORKS [9]
+        Returns:
+            ret_works - a list of Works objects, the works in the system
+        """
+        work_query = post_model.Work.query
+        ret_works = work_query.order_by(db.desc(post_model.Work.id)).offset(offset).limit(limit).all()
+        return ret_works
 
     ###
     # CREATE

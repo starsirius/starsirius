@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 h100p"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 h100p"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 h100p"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js h100p"> <!--<![endif]-->
+<head>
+    {% include 'partials/head.html.partial' %}
+</head>
+<body class="h100p portfolio-browse">
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+<div class="row">
+    <div class="col-xs-24 col-sm-2 col-md-2 col-lg-6 h100p sidebar sidebar-fixed">
+        <div class="cover-area hidden-xs"></div>
+        <!--
+        <div class="logo-area">
+            <div class="logo">
+                <span>CHI</span> <i class="icon-bubble-4"></i><br><span>CHUNG-YI</span>
+            </div>
+        </div>
+        -->
+        <div class="profile-pic-area visible-lg">
+            <div class="img-circle profile-pic"></div>
+        </div>
+        <div class="menu-area">
+            <ul class="nav nav-pills nav-plain-centered menu-list">
+                <li>
+                    <a href="#"><i class="icon-pen-5"></i></a>
+                    <ul class="nav nav-pills submenu-list">
+                        <li>BLOG</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-heart-11"></i></a>
+                    <ul class="nav nav-pills submenu-list">
+                        <li>USER EXPERIENCE DESIGN</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-window-2"></i></a>
+                    <ul class="nav nav-pills submenu-list">
+                        <li>FRONT-END DEVELOPMENT</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-bookmark-6"></i></a>
+                    <ul class="nav nav-pills submenu-list">
+                        <li>PORTFOLIO</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-envelope-3"></i></a>
+                    <ul class="nav nav-pills submenu-list">
+                        <li>CONTACT</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <footer class="footer-sidebar hidden-xs">
+            <ul class="nav nav-pills nav-plain-centered footer-list">
+                <li><span class="copyright">&copy; 2010 - 2013 Chung-Yi Chi</span> </li>
+            </ul>
+        </footer>
+    </div>
+    <div class="col-sm-20 col-md-20 col-lg-16 col-sm-offset-3 col-md-offset-3 col-lg-offset-7">
+        <div class="main pt50">
+            <div class="row">
+                <div class="col-sm-24 col-md-24 col-lg-24">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li class="active">Data</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="title-area">
+                <h1>PORTFOLIO</h1>
+            </div>
+            <div class="row">
+                {% for w in works %}
+                <div class="col-sm-12 col-md-8 col-lg-8">
+                    <div class="thumbnails-area">
+                        <a href="{{ url_for('work', work_id=w.id) }}" class="thumbnail">
+                            <img src="{{ w.cover_image_url }}" alt="">
+                            <div class="caption">
+                                <h3 class="title">{{ w.post.title }}</h3>
+                                <h4 class="subtitle">{{ w.subtitle }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/js-libs.html.partial' %}
+
+<script>
+    (function($) {
+        $('.thumbnail').hover(
+            function() {
+                $(this).find('.caption').addClass('on');
+            }, 
+            function() {
+                $(this).find('.caption').removeClass('on');
+            }
+        );
+    })(jQuery);
+</script>
+
+{% include 'partials/google-analytics.html.partial' %}
+
+</body>
+</html>

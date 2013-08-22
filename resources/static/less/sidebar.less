@@ -1,0 +1,100 @@
+// --------------------------------------------------
+// Sidebar LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Jul, 2013
+// --------------------------------------------------
+
+@profilePicWidth: 100px;
+@profilePicHeight: 100px;
+@profilePicBorderWidth: 5px;
+
+// Sidebar
+// --------------------------------------------------
+.sidebar {
+    border-right: 1px solid #ddd;
+    z-index: 1;
+
+    // Cover picture area
+    // ----------------------------------------------
+    .cover-area {
+        height: 40%;
+        min-height: 300px;
+    }
+
+    // Text logo
+    // ----------------------------------------------
+    .logo-area {
+        position: relative;
+        top: -70px;
+        margin-bottom: -50px;
+        .logo {
+            max-width: 210px;
+            margin: 0 auto;
+            font: 36px/36px 'Bevan', cursive;
+            letter-spacing: -1px;
+            color: @gray-light * 0.7;
+        }
+    }
+
+    // Profile picture
+    // ----------------------------------------------
+    .profile-pic-area {
+        position: relative;
+        bottom: @profilePicHeight / 3;
+        .profile-pic {
+            margin: 0 auto;
+            background: #eee 0px 200px url('../img/sprite-home.jpg');
+            background-size: cover;
+            width: @profilePicWidth;
+            height: @profilePicHeight;
+            border: @profilePicBorderWidth solid #fff;
+            .box-shadow(3px 3px 6px rgba(0,0,0,.3));
+        }
+    }
+
+    // Main navigation menu
+    // ----------------------------------------------
+    .menu-list {
+        > li {
+            position: relative;
+            font-size: 30px;
+            line-height: 30px;
+            &:hover {
+                .submenu-list {
+                    display: block;
+                }
+            }
+        }
+        .submenu-list {
+            display: none;
+            position: absolute;
+            > li {
+                font-size: 13px;
+                line-height: 1.5;
+                color: @fg-light;
+                text-transform: uppercase;
+                text-align: left;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+.sidebar-fixed {
+    position: fixed;
+}
+
+// Responsive for xs devices
+// --------------------------------------------------
+@media (max-width: @screen-sm) {
+    .sidebar {
+        height: auto;
+        padding: 10px 0;
+        background-color: @bg-light;
+        border: 0;
+        border-bottom: 1px solid #ddd;
+        left: 0;
+        right: 0;
+    }
+}

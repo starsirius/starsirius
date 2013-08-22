@@ -1,0 +1,66 @@
+// --------------------------------------------------
+// Portfolio Work Page LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Jul, 2013
+// --------------------------------------------------
+
+.portfolio-work {
+
+    // Headings
+    // ----------------------------------------------
+    h1, h2, h3 {
+        font-family: Aller, "Proxima Nova";
+    }
+    h2 {
+        font-size: 22px;
+        color: @gray-lighter * 0.95;
+    }
+    h4, h5 {
+        font-family: "Proxima Nova";
+        font-weight: 700;
+    }
+
+    // Summary area
+    // ----------------------------------------------
+    .summary-area {
+        padding: 30px 0;
+        background-color: @bg-dark;
+        color: @bg-light;
+        .box-shadow(0 3px 3px 3px rgba(0, 0, 0, 0.1));
+        p {
+            font-weight: 300;
+        }
+        img {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+
+    .meta {
+        font-size: 13px;
+        font-weight: 100;
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            > li {
+                display: inline;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    // Content area
+    // ----------------------------------------------
+    .content-area {
+        padding: 30px 0;
+        img {
+            width: 100%;
+            margin: 15px 0;
+        }
+        section {
+            margin-bottom: 50px;
+        }
+    }
+}

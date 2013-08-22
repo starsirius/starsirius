@@ -1,0 +1,43 @@
+// --------------------------------------------------
+// Portfolio Browse Page LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Aug, 2013
+// --------------------------------------------------
+
+.portfolio-browse {
+    
+    // Thumbnails
+    // ----------------------------------------------
+    .thumbnails-area {
+        margin-bottom: 15px;
+        .thumbnail {
+            position: relative;
+            overflow: hidden;
+            .caption {
+                position: absolute;
+                left: @thumbnail-padding;
+                right: @thumbnail-padding;
+                bottom: -50%; // TODO This is just Heuristic
+                padding: 15px 20px;
+                background-color: rgba(255, 255, 255, 0.7);
+                .transition(bottom 0.3s ease-in-out);
+                .title, .subtitle { margin: 0; }
+                .title {
+                    font-size: 18px;
+                    font-weight: normal;
+                    margin-bottom: 5px;
+                }
+                .subtitle {
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: @gray;
+                }
+            }
+            .caption.on {
+                bottom: @thumbnail-padding;
+                .transition(bottom 0.3s ease-in-out);
+            }
+        }
+    }
+}

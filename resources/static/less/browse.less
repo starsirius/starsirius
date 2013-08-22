@@ -1,0 +1,68 @@
+// --------------------------------------------------
+// Browse Page LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Jul, 2013
+// --------------------------------------------------
+
+@profilePicWidth: 100px;
+@profilePicHeight: 100px;
+@profilePicBorderWidth: 5px;
+
+.browse {
+    // Organizer
+    // ----------------------------------------------
+    .organizer-area {
+        margin-top: 90px;
+        margin-left: -12px;
+        .nav {
+            > li {
+                margin-bottom: 5px;
+                > a {
+                    color: @gray-light;
+                    padding: 2px 5px;
+                    border-left: 8px solid @gray-light;
+                }
+
+            }
+        }
+        .subnav {
+            > li {
+                > a {
+                    border: 0;
+                    padding-left: 13px;
+                }
+            }
+        }
+    }
+
+    // Main Content
+    // ----------------------------------------------
+    .main {
+    }
+    .title-area {
+        padding: 20px 0;
+    }
+    .post {
+        padding-bottom: 20px;
+        .meta-area {
+            margin-bottom: 10px;
+            color: @gray-light;
+            strong {
+                font-weight: lighter;
+            }
+        }
+        .meta {
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            > li {
+                display: inline;
+                margin-right: 10px;
+                a {
+                    color: @gray-light;
+                }
+            }
+        }
+    }
+}

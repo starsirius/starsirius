@@ -1,0 +1,116 @@
+// --------------------------------------------------
+// Home Page LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Jun, 2013
+// --------------------------------------------------
+
+@profilePicWidth: 200px;
+@profilePicHeight: 200px;
+@profilePicBorderWidth: 9px;
+@navItemHeight: 40px;
+@navItemWidth: 40px;
+
+.home {
+    padding-left: 0;
+    padding-right: 0;
+
+    .cover-area {
+        position: relative;
+        height: 70%;
+        min-height: 400px;
+        background-color: #666;
+        .backstretch {
+            img {
+                .grayscale;
+                .opacity(70);
+                //.transition(opacity .6s ease-in);
+            }
+            img:hover {
+                //.opacity(100);
+                //.grayscale.disabled;
+            }
+        }
+    }
+    .profile-pic-area {
+        position: absolute;
+        bottom: -0.3 * (@profilePicHeight + @profilePicBorderWidth * 2);
+    }
+    .profile-pic-origin {
+        position: relative;
+        width: @profilePicWidth + @profilePicBorderWidth * 2;
+        height: @profilePicHeight + @profilePicBorderWidth * 2 ;
+        margin: 0 auto;
+    }
+    .profile-pic {
+        background: #eee 0px 200px url('../img/sprite-home.jpg');
+        position: absolute;
+        width: @profilePicWidth;
+        height: @profilePicHeight;
+        border: @profilePicBorderWidth solid #fff;
+        .box-shadow(3px 3px 6px rgba(0,0,0,.3));
+    }
+    .satellite   { position: absolute; }
+    .speech-area { left: -300px; top: -80px; }
+    .speech-bubble {
+        position: relative;
+        width: 250px;
+        font: 300 16px/24px 'Lato', sans-serif;
+        text-align: center;
+        padding: 1.3em;
+        color: #fff;
+        background-color: #444;
+        border: 9px solid #fff;
+        .border-radius(30px);
+        .box-shadow(2px 2px 4px rgba(0,0,0,.3));
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 0; height: 0;
+            right: 30px;
+            bottom: -50px;
+            border: 25px solid;
+            border-color: #fff #fff transparent transparent;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            width: 0; height: 0;
+            right: 38px;
+            bottom: -30px;
+            border: 15px solid;
+            border-color: #444 #444 transparent transparent;
+        }
+    }
+    .nav-area { 
+        position: absolute;
+        bottom: -0.3 * (@profilePicHeight + @profilePicBorderWidth * 2) - @navItemHeight * 2;
+        ul.nav-list {
+            list-style-type: none;
+            text-align: center;
+            margin-left: 0;
+            li {
+                display: inline; 
+                margin: 0 5px;
+            }
+            i.nav-item {
+                width: @navItemWidth;
+                height: @navItemHeight;
+                color: #ddd;
+                border: 8px solid #ddd;
+                font-size: 30px;
+                line-height: @navItemWidth;
+                .border-radius(500px);
+                //.box-shadow(2px 2px 4px rgba(0,0,0,.3));
+            }
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        color: #999;
+    }
+}

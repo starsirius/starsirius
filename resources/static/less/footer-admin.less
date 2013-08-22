@@ -1,0 +1,22 @@
+// --------------------------------------------------
+// Admin Page Footer LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Jul, 2013
+// --------------------------------------------------
+
+.footer-admin {
+    .nav {
+        > li > a { display: inline-block; } // Overwrite bootstrap style
+    }
+    .navbar-nav {
+        > li > span {
+            display: inline-block;
+            padding-top: ((@navbar-height - @line-height-computed) / 2);
+            padding-bottom: ((@navbar-height - @line-height-computed) / 2);
+            color: @navbar-default-link-color;
+            line-height: @line-height-computed;
+        }
+        > li > .copyright { padding: 10px 15px; }
+    }
+}

@@ -1,0 +1,25 @@
+//
+// Navs
+// --------------------------------------------------
+
+
+// Plain Pills (Decorator of nav-pills)
+// -------------------------
+.nav-plain-centered {
+    text-align: center;
+    > li {
+        float: none;
+        display: inline;
+
+        > a {
+            display: inline;
+            padding: 5px;
+            color: @gray-light;
+            &:hover,
+            &:focus {
+                color: @fg-light;
+                background-color: transparent;
+            }
+        }
+    }
+}

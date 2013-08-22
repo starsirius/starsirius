@@ -1,6 +1,7 @@
 from star import db
 from star.models import db_add
 from star.models.core import post as post_model
+from slugify import slugify
 
 """
 This is the user data access layer.
@@ -101,7 +102,7 @@ class PostPrivateDAL(object):
     ############
 
     @staticmethod
-    def createPost(author_id, title, excerpt, content, status, comment_status, password, slug):
+    def createPost(author_id, title, excerpt, content, status, comment_status, password):
         """
         """
         post = post_model.Post()
@@ -112,14 +113,14 @@ class PostPrivateDAL(object):
         post.status = status
         post.comment_status = comment_status
         post.password = password
-        post.slug = slug
+        post.slug = slugify(title)
         return post
 
     @staticmethod
-    def addPost(author_id, title, excerpt, content, status, comment_status, password, slug):
+    def addPost(author_id, title, excerpt, content, status, comment_status, password):
         """
         """
-        post = PostPrivateDAL.createPost(author_id, title, excerpt, content, status, comment_status, password, slug)
+        post = PostPrivateDAL.createPost(author_id, title, excerpt, content, status, comment_status, password)
         return db_add(post)
 
     @staticmethod

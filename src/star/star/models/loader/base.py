@@ -41,8 +41,8 @@ def init_data():
             u"Post content", 
             u"published", 
             u"allowed", 
-            flask_bcrypt.generate_password_hash(u"password"), 
-            u"-".join(title.split()))
+            flask_bcrypt.generate_password_hash(u"password")
+    )
 
     term_art = TaxonomyPrivateDAL.addTerm(u'Art')
     term_life = TaxonomyPrivateDAL.addTerm(u'life')
@@ -69,7 +69,9 @@ def init_data():
     work = PostPrivateDAL.addWork(
             post.id, 
             u"Post Subtitle", 
-            u"Post summary")
+            u"Post summary", 
+            u""
+    )
 
 """
 def init_data():

@@ -8,7 +8,7 @@ sudo pip install virtualenv
 echo "\n############################"
 echo "Creating virtualenv..."
 echo "############################"
-virtualenv starenv
+virtualenv --python=python2.7 starenv
 
 echo "\n########################"
 echo "Activating virtualenv..."

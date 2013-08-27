@@ -1,0 +1,50 @@
+<div class="cover-area hidden-xs"></div>
+<!--
+<div class="logo-area">
+    <div class="logo">
+        <span>CHI</span> <i class="icon-bubble-4"></i><br><span>CHUNG-YI</span>
+    </div>
+</div>
+-->
+<div class="profile-pic-area">
+    <div class="img-circle profile-pic"></div>
+</div>
+<div class="menu-area">
+    <ul class="nav nav-pills nav-plain-centered menu-list">
+        <li>
+            <a href="#"><i class="icon-pen-5"></i></a>
+            <ul class="nav nav-pills submenu-list">
+                <li>BLOG</li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="icon-heart-11"></i></a>
+            <ul class="nav nav-pills submenu-list">
+                <li>USER EXPERIENCE DESIGN</li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="icon-window-2"></i></a>
+            <ul class="nav nav-pills submenu-list">
+                <li>FRONT-END DEVELOPMENT</li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="icon-bookmark-6"></i></a>
+            <ul class="nav nav-pills submenu-list">
+                <li>PORTFOLIO</li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="icon-envelope-3"></i></a>
+            <ul class="nav nav-pills submenu-list">
+                <li>CONTACT</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<footer class="footer-sidebar hidden-xs">
+    <ul class="nav nav-pills nav-plain-centered footer-list">
+        <li><span class="copyright">&copy; 2010 - 2013 Chung-Yi Chi</span> </li>
+    </ul>
+</footer>

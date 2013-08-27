@@ -6,7 +6,7 @@
     </div>
 </div>
 -->
-<div class="profile-pic-area">
+<div class="profile-pic-area visible-lg">
     <div class="img-circle profile-pic"></div>
 </div>
 <div class="menu-area">

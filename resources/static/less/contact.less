@@ -1,0 +1,40 @@
+// --------------------------------------------------
+// Contact Page LESS stylesheet
+//
+// Chung-Yi Chi (cychi1210@gmail.com)
+// Aug, 2013
+// --------------------------------------------------
+
+.contact {
+    .about {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    .contact-area {
+        > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            > li {
+                line-height: 48px;
+                margin-bottom: 5px;
+                color: @gray-light;
+                &:hover {
+                    color: @gray-darker;
+                }
+                i {
+                    vertical-align: middle;
+                    font-size: 32px;
+                    margin-right: 5px;
+                }
+                a {
+                    color: @gray-light;
+                    &:hover {
+                        text-decoration: none;
+                        color: @gray-darker;
+                    }
+                }
+            }
+        }
+    }
+}

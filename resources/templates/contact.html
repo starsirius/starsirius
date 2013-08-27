@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 h100p"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 h100p"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 h100p"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js h100p"> <!--<![endif]-->
+<head>
+    {% include 'partials/head.html.partial' %}
+</head>
+<body class="h100p contact">
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+<div class="row h100p">
+    <div class="col-xs-24 col-sm-2 col-md-2 col-lg-6 h100p sidebar sidebar-fixed">
+        {% include 'partials/sidebar.html.partial' %}
+    </div>
+    <div class="col-sm-20 col-md-20 col-lg-16 col-sm-offset-3 col-md-offset-3 col-lg-offset-7">
+        <div class="main pt50">
+            <div class="row">
+                <div class="col-sm-24 col-md-24 col-lg-24">
+                    <ol class="breadcrumb">
+                        <li><a href="{{url_for('index')}}">Home</a></li>
+                        <li class="active">Contact</li>
+                    </ol>
+                </div>
+            </div>
+            <h1>Contact</h1>
+            <div class="row">
+                <div class="col-sm-8 col-md-6 col-lg-6">
+                    <div class="contact-area mb30">
+                        <ul class="contact-list">
+                            <li><a href="/static/files/Chung-Yi Chi_Resume_BW.pdf" target="_blank"><i class="icon-profile"></i> Resume (Aug 2013)</a></li>
+                            <li><i class="icon-envelop"></i> cychi1210[AT]gmail.com</li>
+                            <li data-toggle="tooltip" title="PGP Key" data-placement="left"><a href="/static/files/pubkey.chungyi_chi"><i class="icon-key-stroke"></i> 0x8EAACBC0</a></li>
+                            <li data-toggle="tooltip" title="PGP Fingerprint" data-placement="left" target="_blank"><i class="icon-quill"></i> 9F0F 6C3C 364E 69F9</li>
+                            <li><a href="https://github.com/starsirius" target="_blank"><i class="icon-github-3"></i> GitHub</a></li>
+                            <li><a href="http://www.linkedin.com/pub/chung-yi-chi/3b/236/163" target="_blank"><i class="icon-linkedin"></i> LinkedIn</a></li>
+                            <li><a href="https://www.facebook.com/starsirius" target="_blank"><i class="icon-facebook-2"></i> Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-16 col-md-16 col-lg-16">
+                    <div class="about">
+                        <p>
+                        I’m a UX designer, developer, and amateur 
+                        photographer from <strong>Taiwan the Formosa</strong>, currently 
+                        living in New York City, NY. 
+                        I have worked at 
+                        <a href="http://www.tutorspree.com" target="_blank"><strong>Tutorspree</strong></a>
+                        as the UX design lead 
+                        and a front-end developer for about two years.
+                        I received my MS degree in <strong>Human-Computer 
+                        Interaction (HCI)</strong> from <strong>Carnegie Mellon University</strong>
+                        in Aug., 2011. 
+                        I received both my BS and another MS in <strong>Computer 
+                        Science</strong> from the <strong>National Taiwan University</strong>, Taiwan. 
+                        With the combination of HCI speciality and strong 
+                        technology background, I'm passionate about designing 
+                        and creating stuff with world-changing impact, 
+                        especially from a user experience perspective. 
+                        I enjoy challenges, especially in competing with 
+                        outstanding opponents. I’m devoted to perfecting 
+                        my technological expertise, communication skills, 
+                        and leadership via participation of various project, 
+                        work, and competition opportunities. 
+                        In addition, I love playing guitar, swimming, 
+                        and drinking tons of black tea. 
+                        As a kid growing up in nearly snowless Taiwan, 
+                        I have always wanted to learn how to snowboard.
+                        </p>
+                        <p>
+                        As you can tell from the website, my interest is 
+                        pretty broad. 
+                        I have other projects and experience that I would 
+                        love to share so feel free to contact me if you are 
+                        interested in anything. 
+                        Also, see my resume and the website for what I 
+                        have accomplished to date.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/js-libs.html.partial' %}
+{% include 'partials/google-analytics.html.partial' %}
+
+<script>
+    $('[data-toggle="tooltip"]').tooltip();
+</script>
+
+</body>
+</html>

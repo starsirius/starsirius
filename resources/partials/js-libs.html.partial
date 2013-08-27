@@ -9,3 +9,4 @@
 <script src="/static/js/bs/transition.js"></script>
 <script src="/static/js/bs/tab.js"></script>
 <script src="/static/js/bs/collapse.js"></script>
+<script src="/static/js/bs/tooltip.js"></script>

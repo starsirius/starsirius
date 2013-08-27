@@ -13,6 +13,11 @@ def login():
     data = {"project_name": "Hello World"}
     return render(site_views.login, data)
 
+@app.route('/contact', methods=['GET'])
+def contact():
+    data = {}
+    return render(site_views.contact, data)
+
 @app.errorhandler(404)
 def not_found(error):
     return render(site_views.not_found, 404)

@@ -14,31 +14,31 @@
 <div class="menu-area">
     <ul class="nav nav-pills nav-plain-centered menu-list">
         <li>
-            <a href="#"><i class="icon-pen-5"></i></a>
+            <a href="{{url_for('browse_blog')}}"><i class="icon-pen-5"></i></a>
             <ul class="nav nav-pills submenu-list">
                 <li>BLOG</li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="icon-heart-11"></i></a>
+            <a href="{{url_for('browse_ux_posts')}}"><i class="icon-heart-11"></i></a>
             <ul class="nav nav-pills submenu-list">
                 <li>USER EXPERIENCE DESIGN</li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="icon-window-2"></i></a>
+            <a href="{{url_for('browse_front_end_development_posts')}}"><i class="icon-window-2"></i></a>
             <ul class="nav nav-pills submenu-list">
                 <li>FRONT-END DEVELOPMENT</li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="icon-bookmark-6"></i></a>
+            <a href="{{url_for('browse_portfolio')}}"><i class="icon-bookmark-6"></i></a>
             <ul class="nav nav-pills submenu-list">
                 <li>PORTFOLIO</li>
             </ul>
         </li>
         <li>
-            <a href="#"><i class="icon-envelope-3"></i></a>
+            <a href="{{url_for('contact')}}"><i class="icon-envelope-3"></i></a>
             <ul class="nav nav-pills submenu-list">
                 <li>CONTACT</li>
             </ul>

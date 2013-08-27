@@ -6,7 +6,7 @@
 <head>
     {% include 'partials/head.html.partial' %}
 </head>
-<body class="h100p portfolio-browse">
+<body class="h100p home">
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
@@ -17,12 +17,12 @@
     </div>
     <div class="col-sm-20 col-md-20 col-lg-16 col-sm-offset-3 col-md-offset-3 col-lg-offset-7 h100p">
         <div class="hidden-xs" style="height: 25%; min-height: 200px;"></div>
-        <div class="main pt50">
+        <div class="main">
             <div class="jumbotron">
                 <div class="container">
-                    <h1>I'm { Chung-Yi Chi }</h1>
+                    <h1>I'm <span class="name">{ Chung-Yi Chi }</span></h1>
                     <p></p>
-                    <p>The new design with my recent works is coming soon. I will share what I've done and my thoughts about User Exeprience and Front-end Development here.</p>
+                    <p><strong>Designerd</strong>. I design and code up elegant User Experience. I will share what I've done and my thoughts about UX and front-end development here.</p>
                     <p>In the mean time, please take a look at my <a href="{{url_for('browse_portfolio')}}">portfolio</a> and feel free to <a href="{{url_for('contact')}}">contact</a> me.</p>
                 </div>
             </div>

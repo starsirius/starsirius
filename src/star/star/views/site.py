@@ -10,6 +10,16 @@ def index(data_dict):
     """
     return render_template('templates/index.html', **data_dict)
 
+def login(data_dict):
+    """
+    Generates the html string for the login page given a data dictionary.
+    Arguments:
+        data_dict - a dictionary, the data to be used in the html template
+    Return:
+        res - a string, the html string of the view
+    """
+    return render_template('templates/login.html', **data_dict)
+
 def not_found(data_dict):
     """
     Return the 404 Not Found string

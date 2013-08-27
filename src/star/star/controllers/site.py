@@ -8,6 +8,11 @@ def index():
     data = {"project_name": "Hello World"}
     return render(site_views.index, data)
 
+@app.route('/login', methods=['GET'])
+def login():
+    data = {"project_name": "Hello World"}
+    return render(site_views.login, data)
+
 @app.errorhandler(404)
 def not_found(error):
     return render(site_views.not_found, 404)

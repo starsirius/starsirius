@@ -22,7 +22,7 @@ class Post(db.Model):
     author_id =         db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     author =            db.relationship('User', uselist=False, passive_deletes=True)
     title =             db.Column(db.Unicode(250), nullable=False)
-    excerpt =           db.Column(db.Unicode(1000), nullable=False)
+    excerpt =           db.Column(db.Unicode(5000), nullable=False)
     content =           db.Column(db.Unicode(10000), nullable=False)
     status =            db.Column(db.Unicode(20), nullable=False, default=u"publish")
     comment_status =    db.Column(db.Unicode(20), nullable=False, default=u"open")
@@ -40,7 +40,7 @@ class Work(db.Model):
     post_id =           db.Column(db.Integer, db.ForeignKey('post.id', deferrable=True, ondelete='CASCADE'), unique=True, nullable=False) # with unique=True, a post can only have one work
     post =              db.relationship('Post', uselist=False, primaryjoin=Post.id==post_id, backref=db.backref('work', uselist=False))
     subtitle =          db.Column(db.Unicode(250), nullable=False)
-    summary =           db.Column(db.Unicode(1000), nullable=False)
+    summary =           db.Column(db.Unicode(5000), nullable=False)
     cover_image_url =   db.Column(db.Unicode(149), nullable=False, default=u"http://www.gravatar.com/avatar/HASH?d=identicon")
     meta_data =         db.Column(db.UnicodeText, nullable=True)
     created =           db.Column(db.DateTime, nullable=False, default=now)

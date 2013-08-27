@@ -33,6 +33,7 @@ def init_data():
     ###
     # POST
     ############
+    """
     title = u"Post Title"
     post = PostPrivateDAL.addPost(
             user.id, 
@@ -72,6 +73,7 @@ def init_data():
             u"Post summary", 
             u""
     )
+    """
 
 """
 def init_data():

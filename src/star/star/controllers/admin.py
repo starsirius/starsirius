@@ -1,4 +1,4 @@
-from flask import Flask, render_template, render_template_string, jsonify, redirect, url_for, request, send_from_directory
+from flask import Flask, render_template, render_template_string, jsonify, redirect, url_for, request, send_from_directory, session
 from star import app
 from star.views import render
 from star.views import admin as admin_views
@@ -10,6 +10,8 @@ import os
 
 @app.route('/admin', methods=['GET'])
 def admin_dashboard():
+    if not session.get('logged_in'):
+        return url_for('login')
     data = {"project_name": "Hello World"}
     return render(admin_views.admin_dashboard, data)
 
@@ -30,6 +32,7 @@ def create_work():
     # TODO Add tags and categories to the post
 
     cover_image = request.files.get('cover-image', None)
+    cover_image_url = ""
     if cover_image:
         filename = secure_filename(cover_image.filename)
         # NOTE There's a race condition

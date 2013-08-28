@@ -108,7 +108,7 @@ class PostPrivateDAL(object):
             ret_works - a list of Works objects, the works in the system
         """
         work_query = post_model.Work.query
-        ret_works = work_query.order_by(db.desc(post_model.Work.id)).offset(offset).limit(limit).all()
+        ret_works = work_query.order_by(db.desc(post_model.Work.published)).offset(offset).limit(limit).all()
         return ret_works
 
     ###

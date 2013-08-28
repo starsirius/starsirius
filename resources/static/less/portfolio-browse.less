@@ -11,31 +11,33 @@
     // ----------------------------------------------
     .thumbnails-area {
         margin-bottom: 15px;
+        padding: 5px;
         .thumbnail {
             position: relative;
             overflow: hidden;
             .caption {
                 position: absolute;
-                left: @thumbnail-padding;
-                right: @thumbnail-padding;
-                bottom: -50%; // TODO This is just Heuristic
+                left: 0;
+                right: 0;
+                bottom: -60%; // TODO This is just Heuristic
                 padding: 15px 20px;
-                background-color: rgba(255, 255, 255, 0.7);
-                .transition(bottom 0.3s ease-in-out);
+                background-color: rgba(0, 0, 0, 0.6);
+                .transition(bottom 0.2s ease-in-out);
                 .title, .subtitle { margin: 0; }
                 .title {
                     font-size: 18px;
                     font-weight: normal;
                     margin-bottom: 5px;
+                    color: @gray-lighter;
                 }
                 .subtitle {
                     font-size: 14px;
                     font-weight: 300;
-                    color: @gray;
+                    color: (@gray-lighter + @gray-light ) / 2;
                 }
             }
             .caption.on {
-                bottom: @thumbnail-padding;
+                bottom: 0;
                 .transition(bottom 0.3s ease-in-out);
             }
         }

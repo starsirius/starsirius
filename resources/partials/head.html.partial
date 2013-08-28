@@ -3,10 +3,5 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- TODO Remove the code for client compilation of css on production. -->
-    <link rel="stylesheet/less" href="/static/less/style.less">
-    <script src="/static/js/vendor/less-1.3.3.min.js"></script>
-    <!-- End of client compilation of css -->
-
+    <link rel="stylesheet/less" href="/static/css/style.css">
     <script src="/static/js/vendor/modernizr-2.6.2.min.js"></script>

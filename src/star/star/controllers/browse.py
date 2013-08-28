@@ -21,7 +21,7 @@ def browse_front_end_development_posts():
 
 @app.route('/portfolio', methods=['GET'])
 def browse_portfolio():
-    works = PostPrivateDAL.getWorks()
+    works = PostPrivateDAL.getWorks(limit=None)
     data = {"works": works}
     return render(browse_views.browse_portfolio, data)
 

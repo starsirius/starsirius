@@ -1,0 +1,1187 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.1
+-- Dumped by pg_dump version 9.2.2
+-- Started on 2013-08-28 12:07:36 EDT
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 191 (class 3079 OID 11995)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2345 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 186 (class 1259 OID 19961)
+-- Name: comment; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE comment (
+    id integer NOT NULL,
+    post_id integer NOT NULL,
+    author_name character varying(100) NOT NULL,
+    author_email character varying(100) NOT NULL,
+    author_url character varying(200) NOT NULL,
+    author_ip character varying(100) NOT NULL,
+    content character varying(10000) NOT NULL,
+    approved boolean NOT NULL,
+    karma integer NOT NULL,
+    agent character varying(255) NOT NULL,
+    type character varying(20) NOT NULL,
+    parent_id integer,
+    user_id integer,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.comment OWNER TO star_admin;
+
+--
+-- TOC entry 185 (class 1259 OID 19959)
+-- Name: comment_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE comment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comment_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2346 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: comment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE comment_id_seq OWNED BY comment.id;
+
+
+--
+-- TOC entry 184 (class 1259 OID 19945)
+-- Name: post; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE post (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    title character varying(250) NOT NULL,
+    excerpt character varying(5000) NOT NULL,
+    content character varying(10000) NOT NULL,
+    status character varying(20) NOT NULL,
+    comment_status character varying(20) NOT NULL,
+    password text NOT NULL,
+    slug character varying(250) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    published timestamp without time zone NOT NULL,
+    last_updated timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.post OWNER TO star_admin;
+
+--
+-- TOC entry 183 (class 1259 OID 19943)
+-- Name: post_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE post_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.post_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2347 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: post_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE post_id_seq OWNED BY post.id;
+
+
+--
+-- TOC entry 188 (class 1259 OID 19987)
+-- Name: post_taxonomy_term; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE post_taxonomy_term (
+    id integer NOT NULL,
+    post_id integer,
+    term_id integer NOT NULL,
+    taxonomy_id integer NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.post_taxonomy_term OWNER TO star_admin;
+
+--
+-- TOC entry 187 (class 1259 OID 19985)
+-- Name: post_taxonomy_term_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE post_taxonomy_term_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.post_taxonomy_term_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2348 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: post_taxonomy_term_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE post_taxonomy_term_id_seq OWNED BY post_taxonomy_term.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 19863)
+-- Name: role; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE role (
+    id integer NOT NULL,
+    role_name character varying(149) NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.role OWNER TO star_admin;
+
+--
+-- TOC entry 174 (class 1259 OID 19861)
+-- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE role_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.role_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2349 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE role_id_seq OWNED BY role.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 19853)
+-- Name: taxonomy; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE taxonomy (
+    id integer NOT NULL,
+    name character varying(149) NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.taxonomy OWNER TO star_admin;
+
+--
+-- TOC entry 172 (class 1259 OID 19851)
+-- Name: taxonomy_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE taxonomy_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.taxonomy_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2350 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: taxonomy_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE taxonomy_id_seq OWNED BY taxonomy.id;
+
+
+--
+-- TOC entry 178 (class 1259 OID 19889)
+-- Name: taxonomy_term; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE taxonomy_term (
+    term_id integer NOT NULL,
+    taxonomy_id integer NOT NULL,
+    description character varying(10000) NOT NULL,
+    parent_id integer NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.taxonomy_term OWNER TO star_admin;
+
+--
+-- TOC entry 169 (class 1259 OID 19832)
+-- Name: term; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE term (
+    id integer NOT NULL,
+    name character varying(149) NOT NULL,
+    slug character varying(149) NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.term OWNER TO star_admin;
+
+--
+-- TOC entry 168 (class 1259 OID 19830)
+-- Name: term_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE term_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.term_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2351 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: term_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE term_id_seq OWNED BY term.id;
+
+
+--
+-- TOC entry 177 (class 1259 OID 19873)
+-- Name: user; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE "user" (
+    id integer NOT NULL,
+    usercred_id integer NOT NULL,
+    first_name character varying(149) NOT NULL,
+    last_name character varying(149) NOT NULL,
+    display_name character varying(149) NOT NULL,
+    phone_number character varying(40),
+    image_url character varying(149) NOT NULL,
+    last_login timestamp without time zone NOT NULL,
+    created timestamp without time zone NOT NULL,
+    last_updated timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO star_admin;
+
+--
+-- TOC entry 176 (class 1259 OID 19871)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2352 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- TOC entry 180 (class 1259 OID 19909)
+-- Name: user_role; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE user_role (
+    id integer NOT NULL,
+    user_id integer,
+    role_id integer,
+    created timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_role OWNER TO star_admin;
+
+--
+-- TOC entry 179 (class 1259 OID 19907)
+-- Name: user_role_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE user_role_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_role_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2353 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: user_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE user_role_id_seq OWNED BY user_role.id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 19844)
+-- Name: usercred; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE usercred (
+    id integer NOT NULL,
+    email character varying(100) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    last_updated timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.usercred OWNER TO star_admin;
+
+--
+-- TOC entry 170 (class 1259 OID 19842)
+-- Name: usercred_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE usercred_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.usercred_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2354 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: usercred_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE usercred_id_seq OWNED BY usercred.id;
+
+
+--
+-- TOC entry 182 (class 1259 OID 19927)
+-- Name: userpasswd; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE userpasswd (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    password text NOT NULL,
+    created timestamp without time zone NOT NULL,
+    last_updated timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.userpasswd OWNER TO star_admin;
+
+--
+-- TOC entry 181 (class 1259 OID 19925)
+-- Name: userpasswd_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE userpasswd_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.userpasswd_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2355 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: userpasswd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE userpasswd_id_seq OWNED BY userpasswd.id;
+
+
+--
+-- TOC entry 190 (class 1259 OID 20005)
+-- Name: work; Type: TABLE; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE TABLE work (
+    id integer NOT NULL,
+    post_id integer NOT NULL,
+    subtitle character varying(250) NOT NULL,
+    summary character varying(5000) NOT NULL,
+    cover_image_url character varying(149) NOT NULL,
+    meta_data text,
+    created timestamp without time zone NOT NULL,
+    published timestamp without time zone NOT NULL,
+    last_updated timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.work OWNER TO star_admin;
+
+--
+-- TOC entry 189 (class 1259 OID 20003)
+-- Name: work_id_seq; Type: SEQUENCE; Schema: public; Owner: star_admin
+--
+
+CREATE SEQUENCE work_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.work_id_seq OWNER TO star_admin;
+
+--
+-- TOC entry 2356 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: work_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: star_admin
+--
+
+ALTER SEQUENCE work_id_seq OWNED BY work.id;
+
+
+--
+-- TOC entry 2260 (class 2604 OID 19964)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY comment ALTER COLUMN id SET DEFAULT nextval('comment_id_seq'::regclass);
+
+
+--
+-- TOC entry 2259 (class 2604 OID 19948)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
+
+
+--
+-- TOC entry 2261 (class 2604 OID 19990)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY post_taxonomy_term ALTER COLUMN id SET DEFAULT nextval('post_taxonomy_term_id_seq'::regclass);
+
+
+--
+-- TOC entry 2255 (class 2604 OID 19866)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY role ALTER COLUMN id SET DEFAULT nextval('role_id_seq'::regclass);
+
+
+--
+-- TOC entry 2254 (class 2604 OID 19856)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY taxonomy ALTER COLUMN id SET DEFAULT nextval('taxonomy_id_seq'::regclass);
+
+
+--
+-- TOC entry 2252 (class 2604 OID 19835)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY term ALTER COLUMN id SET DEFAULT nextval('term_id_seq'::regclass);
+
+
+--
+-- TOC entry 2256 (class 2604 OID 19876)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2257 (class 2604 OID 19912)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY user_role ALTER COLUMN id SET DEFAULT nextval('user_role_id_seq'::regclass);
+
+
+--
+-- TOC entry 2253 (class 2604 OID 19847)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY usercred ALTER COLUMN id SET DEFAULT nextval('usercred_id_seq'::regclass);
+
+
+--
+-- TOC entry 2258 (class 2604 OID 19930)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY userpasswd ALTER COLUMN id SET DEFAULT nextval('userpasswd_id_seq'::regclass);
+
+
+--
+-- TOC entry 2262 (class 2604 OID 20008)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY work ALTER COLUMN id SET DEFAULT nextval('work_id_seq'::regclass);
+
+
+--
+-- TOC entry 2333 (class 0 OID 19961)
+-- Dependencies: 186
+-- Data for Name: comment; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY comment (id, post_id, author_name, author_email, author_url, author_ip, content, approved, karma, agent, type, parent_id, user_id, created) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2357 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('comment_id_seq', 1, false);
+
+
+--
+-- TOC entry 2331 (class 0 OID 19945)
+-- Dependencies: 184
+-- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY post (id, author_id, title, excerpt, content, status, comment_status, password, slug, created, published, last_updated) FROM stdin;
+1	1	3D Pinball						3d-pinball	2013-08-27 02:07:55.171949	2013-08-27 02:07:55.171968	2013-08-27 02:07:55.171974
+2	1	HySpe Project						hyspe-project	2013-08-27 02:08:33.655889	2013-08-27 02:08:33.655914	2013-08-27 02:08:33.655924
+3	1	Expert Recommender						expert-recommender	2013-08-27 02:09:21.151803	2013-08-27 02:09:21.151821	2013-08-27 02:09:21.151827
+4	1	Baby Bear’s Adventure						baby-bears-adventure	2013-08-27 02:10:22.28678	2013-08-27 02:10:22.286797	2013-08-27 02:10:22.286804
+5	1	Drawing Whispers						drawing-whispers	2013-08-27 02:11:54.780599	2013-08-27 02:11:54.780624	2013-08-27 02:11:54.780634
+6	1	MEonPlay						meonplay	2013-08-27 02:12:39.697353	2013-08-27 02:12:39.697379	2013-08-27 02:12:39.69739
+7	1	The Power of Words		<section>\r\n<h3>Paper Abstract</h3>\r\n<p>\r\nMusic mood estimation (MME) is a key technology in mood-based music recommendation. While mainstream MME research nowadays relies on audio music analysis, exploring the significance of lyrics text in predicting song emotion is gaining attention in recent years. One major impediment to MME research is the lack of a clearly labeled and publicly available dataset annotating the emotion ratings of lyrics text and audio separately. In light of this, we compiled a dataset of 600 pop songs (iPop) from the mood ratings of 246 participants who experienced three different song sessions, lyrics text (L), audio music track (M), and the combination of lyrics text and audio music track (C). We then applied statistical analysis to estimate how lyrics text and audio contribute to a song’s overall valence-arousal (V-A) mood ratings. Our results show that lyrics are not only a valid measure for estimating a song’s mood rating, but also provide s upplementary information that can improve audio-only MME systems. Furthermore, a detailed examination suggests that lyrics text (L) ratings are better estimators of the overall mood ratings of a song (C) in cases where L and M ratings conflict. We then construct a MME system that employs both features extracted from lyrics text and audio music track and validate the conclusions acquired in our statistical analysis. In estimating either V or A rating, the model with lyrics text plus audio track features performs better than only the model with only lyrics text or audio track features. These results validate the statement acquired by the statistical analysis.\r\n</p>\r\n</section>				the-power-of-words	2013-08-27 02:14:21.858404	2013-08-27 02:14:21.858425	2013-08-27 02:14:21.858431
+8	1	Ticket Vending Machine UI Redesign						ticket-vending-machine-ui-redesign	2013-08-27 02:15:45.351923	2013-08-27 02:15:45.351938	2013-08-27 02:15:45.351944
+9	1	Warm Color Poster						warm-color-poster	2013-08-27 02:16:25.100384	2013-08-27 02:16:25.100401	2013-08-27 02:16:25.100408
+10	1	Aeron Chairs Brochure						aeron-chairs-brochure	2013-08-27 02:17:09.70363	2013-08-27 02:17:09.703648	2013-08-27 02:17:09.703657
+11	1	Interpreting Voice & Text as Image						interpreting-voice-text-as-image	2013-08-27 02:17:51.869344	2013-08-27 02:17:51.869362	2013-08-27 02:17:51.869368
+12	1	Carbon Footprint						carbon-footprint	2013-08-27 02:18:26.357782	2013-08-27 02:18:26.357801	2013-08-27 02:18:26.357807
+13	1	WorkoutDJ						workoutdj	2013-08-27 02:19:05.647656	2013-08-27 02:19:05.647676	2013-08-27 02:19:05.647682
+14	1	Student’s Entree Cookbook						students-entree-cookbook	2013-08-27 02:19:45.499813	2013-08-27 02:19:45.499834	2013-08-27 02:19:45.499846
+15	1	Easy Light Switch						easy-light-switch	2013-08-27 02:20:29.299947	2013-08-27 02:20:29.299969	2013-08-27 02:20:29.299978
+16	1	WalkSocial						walksocial	2013-08-27 02:21:10.782684	2013-08-27 02:21:10.782702	2013-08-27 02:21:10.782708
+17	1	HealthMonth+						healthmonth	2013-08-27 02:22:00.788586	2013-08-27 02:22:00.78861	2013-08-27 02:22:00.78862
+18	1	Story Wand		<section>\r\n<h3>Process Overview</h3>\r\n<p>\r\nWe started with an I wish/I like activity to identify areas of interest in the opportunity space between kids and parents. Then we conducted four interviews of families with kids from ages 17 months to 12 years, which provided us more insights for our design. By the time we had finished synthesizing our interview insights, we had nearly 50 ideas in mind for product concepts. We plotted our ideas on an impact-difficulty chart and narrowed them down to 9 most compelling ones. We created example scenarios for each of them and conducted speed dating sessions with 3 families. Our speed-dating results identified the story wand as the best candidate. To demonstrate and test our design idea, we made a low-fidelity prototype and brought it to one of families we visited before. Photos from this visit formed the basis for a video sketch to communicate the contexts and use of our idea.\r\n</p>\r\n<h3>How It Works</h3>\r\n<p>\r\nTo engage with an object, point the wand at it. A camera in the tip recognizes the primary object in the scene. To record, squeeze the handle. To stop recording, stop pointing. To play back a sound, point the wand steadily at an object. If a sound has been stored for this object, the sound will play. This functionality can be used to explore the house, finding sounds that have been “hidden” by other users.\r\n</p>\r\n<p>\r\nSounds are stored both by object and chronologically, allowing them to be collectively reviewed on a computer. Contiguous make-believe sessions can automatically be recognized, allowing a parent to play back a full story for reflection or to share with family friends and loved ones.\r\n</p>\r\n<p>\r\nAutomatic syncing and backup can be accomplished through a charging stand which doubles as a night light. By keeping data transfer limited to sneakernet and the house network, we satisfy parents’ security concerns while simultaneously reducing the complexity of the deployed system.\r\n</p>				story-wand	2013-08-27 02:23:33.140861	2013-08-27 02:23:33.140886	2013-08-27 02:23:33.140895
+19	1	TransForm						transform	2013-08-27 02:24:46.381152	2013-08-27 02:24:46.381169	2013-08-27 02:24:46.381176
+20	1	Master’s Capstone Project		<section>\r\n    <h3>Background</h3>\r\n    <p>\r\n    The MHCI Capstone Project at Carnegie Mellon University is an eight-month long, end-to-end process of a research and development product cycle, while working closely with an industry sponsor on new ideas or applications that enhance or create a new human-to-computer technology. Each team is comprised of 4 to 5 interdisciplinary MHCI graduate students, and works on project ranging from healthcare, finance, education, to accessible technology. The Capstone Project is split into 2 semesters: the first semester focuses on research, and the second focuses on ideation, design, development and usability testing. The final deliverable varies from project to project, but most often, teams deliver a high-fidelity, semi-functional prototype along with a comprehensive report, a user-interaction specification, and relevant documentation.\r\n    </p>\r\n    <p>\r\n    <em>\r\n    Unfortunately, I am not permitted to reveal confidential information of the design here. However, I will do my best to present the process and findings throughout the project.\r\n    </em>\r\n    </p>\r\n</section>\r\n<section>\r\n    <h3>The Swiftline Team</h3>\r\n    <p>\r\n    Our team is comprised of 4 interdisciplinary MHCI graduate students with very diverse and complementary expertise.\r\n    </p>\r\n</section>\r\n<section>\r\n    <h3>Spring Research: Breaking Through the Blockage</h3>\r\n    <p>\r\n    To arrive at our initial design ideas, we used contextual methods to investigate the problem space. The team traveled to four sites across the country to observe and interview cardiology staff members in their everyday work contexts. Specifically, we used contextual inquires to observe workflow – where permitted by HIPAA – directed storytelling to learn about past experiences, and visioning exercises to understand perceived workflow breakdowns and identify opportunities for improvement.\r\n    </p>\r\n    <p>\r\n    In addition to user research, we conducted a competitive analysis and literature review to ground our understanding of the problem space. We synthesized the findings from these two major research phases to tease out the breakdowns and design opportunities, and arrive at our initial recommendations and design suggestions.\r\n    </p>\r\n    \r\n    <h4>Field Research Methods</h4>\r\n    <h5>Contextual Inquiry (CI)</h5>\r\n    <p>\r\n    During the site visits, we used CIs to observe cardiologists, electrophysiologists, technologists and nurses in their work environment and daily routines. In particular, we used CIs to investigate the input of patient procedural data before and after procedures.\r\n    </p>\r\n\r\n    <h5>Directed Storytelling</h5>\r\n    <p>\r\n    We asked the participants to tell stories about their peri-procedure tasks and experiences. Participants were prompted to explain additional aspects related to the foci, including staff-to-staff communication, individual roles and responsibilities, uses of technology, and personal perspectives on technology and communication.\r\n    </p>\r\n\r\n    <h5>Interview</h5>\r\n    <p>\r\n    Before arriving on-site, we conducted an initial, structured phone interview to gather participant background information and to prepare for the site visit.\r\n    </p>\r\n\r\n    <h5>Visioning Exercise</h5>\r\n    <p>\r\n    After the Contextual Inquiry, we sat down with participants to briefly discuss any problems or breakdowns they encounter in their workflows, and asked them to sketch out the corresponding ideal improvements. These sketches will help inform our own visioning and design processes.\r\n    </p>\r\n\r\n    <h4>Data Synthesis</h4>\r\n    <p>\r\n    After our four site visits, and 39 interviews, we moved into the synthesis phase of our research plan. The primary goal of this phase was to organize and present our data in a format that helped us reach a shared understanding of the data, identify relationships and differences, spot breakdowns, and ultimately, draw out a set of high-level findings. To this end, we: created data models; transcribed our interviews; created “data buckets” with key insights, quotes and findings; and organized these buckets using affinity diagramming.\r\n    </p>\r\n\r\n    <h4>Findings</h4>\r\n    <p>\r\n    Below are our five major findings, extracted from the user data during the synthesis phase. These findings informed our design recommendations, and guided our prototyping and development phase.\r\n    </p>\r\n\r\n    <ul>\r\n        <li>Finding 1: Customization facilitates communication and processes.</li>\r\n        <li>Finding 2: Streamlined data input is paramount to efficient and accurate work.</li>\r\n        <li>Finding 3: System integration would save countless valuable resources.</li>\r\n        <li>Finding 4: Accessible and portable information supports workflow mobility.</li>\r\n        <li>Finding 5: Workflow flexibility increases staff satisfaction.</li>\r\n    <ul>\r\n</section>\r\n<section>\r\n    <h3>Summer Design: TransForming the Paper Form</h3>\r\n    <h4>Iterative Design</h4>\r\n    <p>\r\n    The usability testing-based, iterative design process is at the core of Human-Computer Interaction methods, and offers a number of benefits both to the design team and to the client. First, the iterative process reduces cost both in terms of time and money. Low-fidelity, paper prototypes are highly cost-effective, as they take very little time and resources to create. They provide high-level feedback early on, and can inform the overall direction of the project. The more iterations a product goes through, the more opportunity there is to catch issues with the design that could prove costly to reconcile down the road. The earlier such issues are identified, the less resources are lost. Additionally, the user testing component of the iterative design process leads to a well-informed final product. By including real users in the design process, the end product is far more likely to address real users’ real needs.\r\n    </p>\r\n\r\n    <h4>Prototyping</h4>\r\n    <p>\r\n    The iterative design process took us through three major iterations, with two rounds of testing per iteration. We began with paper prototypes that first took the form of hand-drawn sketches, and then moved to slightly higher fidelity paper OmniGraffle prototypes. After testing the latter version, we moved on to click-through prototyping. This iteration was tested twice. The first round was conducted remotely, revealing a number of needed improvements. After these changes were made, the click-through prototype was again tested with a second set of participants. From there, we moved on to the final version and again tested this iteration with two user groups, with a round of changes between the two testing sessions.\r\n    </p>\r\n    <p>\r\n    We tested at four sites, with 12 participants.\r\n    </p>\r\n    <p>\r\n        <em>\r\n        Because the project information is confidential, I cannot present our prototypes.\r\n        </em>\r\n    </p>\r\n\r\n    <h4>Solution</h4>\r\n    <p>\r\n    Cardiology staff can benefit from more tightly integrated patient data input protocols. The collection of patient data is currently cumbersome and inefficient. With the implementation of our TransForm application, patient data can be collected and shared more effectively.\r\n    </p>\r\n    <p>\r\n    Our tool meets these five design goals:\r\n    <ul>\r\n        <li>Satisfaction: New technology is more fun to use</li>\r\n        <li>Efficiency: Data synchronization improves accessibility</li>\r\n        <li>Intuitiveness: Standard UI components and interactions are easy to use</li>\r\n        <li>Patient Dedication: Patient-centric design puts patients first</li>\r\n        <li>Accuracy: Error-checking capabilities and back-end data syncing improve accuracy</li>\r\n    </p>\r\n    <p>\r\n    In addition, TransForm’s flexibility can support hospitals in complying with JCAHO regulations.\r\n    </p>\r\n    <p>\r\n        <em>\r\n        Because the project information is confidential, I cannot present our final design.\r\n        </em>\r\n    </p>\r\n    <p>\r\n    For more information, please refer to our project website.\r\n    </p>\r\n</section>				masters-capstone-project	2013-08-27 02:26:45.857864	2013-08-27 02:26:45.85789	2013-08-27 02:26:45.857898
+21	1	Front-end Redesign & Development of Tutorspree Website		<section>\r\n    <img src="/uploads/responsive_design.jpg">\r\n    <h3>Background</h3>\r\n    <p>\r\n    The first release of Tutorspree website had done a pretty good job connecting students/parents with our awesome tutors listed on the site. However, with the development of a clearer and more ambitious mission of "making learning personal", Tutorspree had been seeking ways to deliver our core value to customers in all possible aspects. The redesign of the website was the most straightforward route.\r\n    </p>\r\n</section>\r\n<section>\r\n    <h3>Outsourcing or Designing it Ourselves?</h3>\r\n    <p>\r\n    The fist question was "Should we outsource the web redesign?". In Tutorspree, even though we had a pretty good sense of visual design, we didn't have a dedicated graphic design team. The resesign process might become unpredictable and impeded the progress of other projects. On the other hand, as Jakob Nielsen pointed out, "Web design is a core competency for the network economy , so you need to build up your own organizational knowledge in the area." The website was the primary way we deliver our value to customers. We should own the control of and set the directions for how we would like to improve the site, e.g. overall look-and-feel, business logic, user experience, usability, etc. \r\n    </p>\r\n    <p>\r\n    We decided to leave the design strategy and user experience in-house, and outsource parts of the redesign project. We hired a visual design company to work on the graphic design, and freelancers to build basic HTML/CSS templates. Tutorspree team worked very closely with them and iterated each part rapidly. I was the lead of Tutorspree team in both projects.\r\n    </p>\r\n </section>\r\n<section>\r\n    <h3>Graphic Design Phase</h3>\r\n    <p>\r\n    </p>\r\n    <h4>Process</h4>\r\n    <h5>Project Kick-off</h5>\r\n    <img src="/uploads/tutorspree_tastes.jpg">\r\n    <p>\r\n    In order to get both teams on the same page, we shared our understanding with everyone about the audience, our brand, the goals of the site, the goals of the redeisgn, marketing plans, etc. through a think-ahead survey. We discussed about the scope of this project and set a rough schedule of milestones. Useful materials were also provided, including examples of websites with good design, Education Consultants' call scripts, roadmap of features, testimonials, etc.\r\n    </p>\r\n    <h5>Mood Board</h5>\r\n    <img src="/uploads/mood_board.jpg">\r\n    <p>\r\n    Mood Board was a preliminary step to visually illustrate the direction of style we should go toward. It's about overall mood and feeling. It's conceptualized and emotional. We gave specific feedback on each of the three Mood Boards the design company came up with, for example, "The flat design was easy to understand.", "Cartoon-style icons are not appropriate for us.", and "Warmer and brighter color scheme would be better for an educational website."\r\n    </p>\r\n    <h5>Inspiration Board</h5>\r\n    <img src="/uploads/inspiration_board.jpg">\r\n    <p>\r\n    More specific design elements were included in the three Inspiration Boards, such as typography, colors, textures, and icons. We also provided feedback on each of them, such as "We like brightness and warm colors, buttons and iconography.", "Mini posters work well but need to think about how it’ll play out in locations where there aren’t tutors.", and "Be careful about leaning too heavily towards the flat design. We have to keep those moms and dads in mind and can't get too edgy/cool on them."\r\n    </p>\r\n    <h5>Wireframes</h5>\r\n    <img src="/uploads/wireframes.jpg">\r\n    <p>\r\n    For each page, the design company created high-fidelity wireframes to illustrate the overal layout, information displayed, available features, priority of functions, scenario, etc. Some pages worked very well, but some were a bit off. In each iteration, we revised the wireframes by providing potential function enhancement, user experience improvement (e.g. important information should be visually prominent and above the fold), search engine optimization (SEO) and conversion concerns (e.g. unique content on the search page about specific tutors), etc. We went through a few iterations for revising the wireframes before the final design.\r\n    </p>\r\n    <h5>Deliverables</h5>\r\n    <img src="/uploads/deliverables.jpg">\r\n    <p>\r\n    The final design was a pixel-perfect template for each page. Basic interactions and different states of a page were also illustrated in the design, for example, a carousel on the tutor profile page to showcase the reviews, and a sticky navigation bar with a call-to-action (CTA) button on top of the page when scrolling below a certain point. The final deliverables included all the details and materials that we would need for implementation, including PSD files, a design spec, grid system, and all the source files (images, fonts, maps, etc).\r\n    </p>\r\n</section>\r\n<section>\r\n    <h3>Front-end Implementation Phase</h3>\r\n    <img src="/uploads/front_end_development.jpg">\r\n    The next step was the implementation of basic front-end templates. We worked with a web development shop in Bangladesh and coded up the design from PSD to HTML/CSS/Javascript. \r\n    <h4>Goal & Requirements</h4>\r\n    <h5>HTML5, CSS3, and Compatibility</h5>\r\n    <p>\r\n    It's the era of HTML5 and CSS3. Users, developers and even search engines gain a lot of benefits from websites using HTML5/CSS3, including better interaction, cleaner and more readable code, semantic meanings of elements, etc. However, backward and cross-browser compatibility were equally important to Tutorspree. Nearly <strong>20%</strong> of visitors (from Jan 1st, 2012 to Jan 1st, 2013) used Internet Explorers to browse the site, and almost <strong>11%</strong> of those visitors still used Internet Explorer 5.5, 6.0, or 7.0. In addition, parents were one of the primary groups in our customer demographics. Therefore, Tutorspree webiste had to well support all types of visitors while we were embracing cutting-edge technology.\r\n    </p>\r\n    <h5>Modular and Scalable Architecture</h5>\r\n    <p>\r\n    In Tutorspree, we prototyped and created new technology rapidly. We iterated and evolved quickly. A solid and concrete foundation was a requirement to make that happen. The redesign and rewrite of the entire site was a good opportunity for us to restructure the architecture and reconsider the technology we'd like to use. We wanted to create modularized and reusable components and a scalable structure that allowed easy future enhancemnet and feature implementation.\r\n    </p>\r\n    <h5>Responsiveness</h5>\r\n    <p>\r\n    Surprisingly, nearly <strong>16%</strong> (and growing) of visitors (Jan 1st, 2012 - Jun 30th, 2013) used mobile or tablet devices to browse Tutorspree website. Providing better mobile user experience had become essential. In comparison with native mobile apps on different devices, a responsive webiste made much more sense in terms of the usage scenario and features we'd like to provide in the near future. So, we required the website to have basic responsive design. However, we only had visual design of the website for desktops but not mobile or tablet devices. It was a challenge for us to support responsiveness without a explicit design.\r\n    </p>\r\n    <h4>Methodology</h4>\r\n    <p>\r\n    Considering the goals and requirements, we decided to use Bootstrap as the front-end framework and HTML5 Boilerplate as the template. Bootstrap used LESS (a dynamic stylesheet language), and was good for creating modular components  and basic responsive design. What we need to do were customizing the LESS styles based on the design specification we got from the other design company and creating our own components and crafting the responsive design layout. \r\n    </p>\r\n    <p>\r\n    One of the major challenges was how we can communicate the details well with the web development shop in Bangladesh to streamline the process and make each iteration as fast as possible. What we actually did was frst setting up a few basic and important rules for them, including how to organize the LESS files (so that we can easily overwrite the default styles and upgrade Bootstrap in the future if necessary), the grid system, breakpoints for the basic responsive design, conventions, etc. And they started and coded up the pages one by one. We then elaborated more details and page-specific styles later in the conversation. Git was a very helpful tool during the process. It not only served as a repository but also an awesome diff tool which allowed me to point out any part of the code easily and precisely during the communication (which is very important when working with a remote team), and allowed me to create and share examples with stakeholders. The process seemed to be slow and unnecessary; however, it turned out very efficient and less error-prone after the first few pages (the turnaround time for each following page was less than 24 hours).\r\n    </p>\r\n    <p>\r\n    <em>In addition to Bootstrap and LESS style sheet, we used other front-end techniques to provide better user experience and site performance, including JavaScript interactive components, icon fonts, image sprite, inline svg, etc.</em>\r\n    </p>\r\n</section>\r\n<section>\r\n    <h3>Back-end Integration Phase</h3>\r\n    <p>\r\n    Once we got the front-end HTML/CSS/Javascript templates, back-end integration was straitforward. In the second version of Tutorspree, we used Flask (a Python microframework) as the back-end framework and Jinja 2 as the templating system. The process basically included extracting reusable components from the templates and converting them into partials, replacing dummy content with real data, organizing web assets (e.g. js, css, and other static files), etc. Fine tunes and optimization can be added continuously as well as setting up A/B tests.\r\n    </p>\r\n</section>				front-end-redesign-development-of-tutorspree-website	2013-08-27 02:36:18.848098	2013-08-27 02:36:18.848115	2013-08-27 02:36:18.84812
+24	1	Streamline Tutorspree Education Consultant Workflow		<section>\r    <img src="/uploads/streamline_sales_workflow.jpg">\r    <h3>Background</h3>\r    <p>\r    The workflow is basically divided into three stages, i.e. lead assessment, tutor matching, and lesson package booking/follow-ups. This project focused on lead assessment and tutor matching.\r    </p>\r    <h3>Design Directions</h3>\r    <h4>Streamline the process of finding potential tutors for an opportunity</h4>\r    <p>\r    <ul>\r        <li>Better ranking algorithm, e.g. a recommender system, content-based or collaborative filtering (CF) or hybrid (requires some sort of tutor rating from clients)</li>\r        <li>Better sorting and filtering mechanism</li>\r        <li>Display more useful information, e.g. availability and responsiveness</li>\r    </ul>\r    </p>\r    <h4>Expand the coverage of tutors we use</h4>\r    <p>\r    <ul>\r        <li>A feedback system for tutors. Record availability, responsiveness, margin, notes, etc.</li>\r        <li>An algorithm to select a tutor from candidates to expand coverage</li>\r    </ul>\r    </p>\r    <h4>Be able to prioritize leads</h4>\r    <p>\r    <ul>\r        <li>A feedback system for leads. Record both qualified and unqualified (e.g. the reasons) leads</li>\r        <li>Analyze historical lead data to prioritize new leads. Can be a ranking system or a classifier</li>\r    </ul>\r    </p>\r</section>				streamline-tutorspree-education-consultant-workflow	2013-08-28 03:16:31.255286	2013-08-28 03:16:31.255303	2013-08-28 03:16:31.25531
+22	1	A/B Testing of Tutorspree Website		<section>\r    <h3>Background</h3>\r    <p>\r    We came up with testing ideas by brainstorming within the team. Good examples and case studies were also helpful. Variants didn't always outperform the original version; however, we always got insights from the data no matter the results were better or not. Here are two case studies with significant improvement on the new design of Tutorspree website, and I would like to share some takeaways.\r    </p>\r    <p>\r    <em>Usually an experiment with 1 variantion reached statistical significance in about 10 days. The more variantions we had, the longer the process would take.</em>\r    </p>\r</section>\r<section>\r    <h3>Case Study 1: CTA button text on the tutor profile page</h3>\r    <img src="/uploads/ab_testing_case_study_1.jpg">\r    <h4>Goal</h4>\r    <p>Submitting the lead generation form</p>\r    <h4>Duration</h4>\r    <p>9 days</p>\r    <h4>Results</h4>\r    <p>\r    Changing the CTA button text from <strong>"START LESSON NOW"</strong> to <strong>"REQUEST TUTORING INFO"</strong> increased the conversion rate by <strong>54.2%</strong> (6.2% vs. 9.5%)\r    </p>\r    <h4>Results Link</h4>\r    <p><a href="http://optimize.ly/~5Z0yBH?token=4bd8e26221bd8e930432" target="_blank">Results</a></p>\r    <h4>Takeaways</h4>\r    <p>\r    It was surprising that the text change made such a huge difference. The actual button click rate (25.6% vs. 26.4%) did not increase as much as the lead form submission rate (6.2% vs. 9.5%). It implied that users dropped off less with the new wording. Considering the flow of form submission, to pop up a lead form modal window and have users to fill out and submit a form, it probably made more sense to use "REQUEST TUTORING INFO" instead of "START LESSON NOW."\r    </p>\r</section>\r<section>\r    <h3>Case Study 2: Sticky CTA bar on top of the search results page</h3>\r    <img src="/uploads/ab_testing_case_study_2.jpg">\r    <h4>Goal</h4>\r    <p>Submitting the lead generation form</p>\r    <h4>Duration</h4>\r    <p>12 days</p>\r    <h4>Results</h4>\r    <p>\r    Replacing the sticky button with a more visually dominant sticky bar that occupies the top row increased the conversion rate by <strong>106.9%</strong> (3.3% vs. 6.9%)\r    </p>\r    <h4>Results Link</h4>\r    <p><a href="http://optimize.ly/~4e32Lo?token=7c0ccbf55cb34d6c0694" target="_blank">Results</a></p>\r    <h4>Takeaways</h4>\r    <p>\r    The sticky button on the original design was not perceptible enough even though it’s sticky to the top right corner when scrolling down. The variation used a sticky bar occupying the entire row and applied drop shadow on it to make it obvious enough without disturbing users too much. In addition, the CTAs on the bar were roughly aligned with the grid system of the content. It looked smooth on top of the two-column cards especially when scrolling.\r    </p>\r    <p>\r    Interestingly, we made another variation that each card had its own CTA button (the "REQUEST TUTORING INFO" button), like the design of the old Tutorspree website. However, the conversion rate was a lot worse than the original design. We argued that the buttons in each card made the page too cluttered and they also lost visual dominance.\r    </p>\r</section>				a-b-testing-of-tutorspree-website	2013-08-27 23:35:21.827863	2013-08-27 23:35:21.827887	2013-08-27 23:35:21.827898
+23	1	Panoramic Admin Panel		<section>\r    <img src="/uploads/admin_panoramic.jpg">\r    <h3>Background</h3>\r    <p>\r    At Tutorspree, Education Consultants used various online services to help our customers. The services rangeed from taking phone calls, recording leads, booking lessons, receiving payments, following up with clients to payouts. It was error-prone and not efficient to keep switching back and forth among websites and tools during the workflow. The idea of Panoramic Admin Panel was to allow Education Consultants to monitor lesson packages of their clients and take necessary actions easily. It should be tailored to the workflow. It should be flexible.\r    </p>\r</section>\r<section>\r    <h3>Features</h3>\r    <p>\r    <ul>\r        <li>Lesson packages were divided into groups. Each group represented a stage that lesson packages could be in, for example, new lesson packages, ongoing lesson packages, and closing lesson packages.</li>\r        <li>Different types of information/reminders/alerts were displayed in different groups according the the need of each stage. Similarly, different actions that Education Consultants can take were provided in different groups.</li>\r        <li>By default, an Education Consultant only saw the lesson packages of his/her clients. However, he/she was able to help other E.C.'s clients by taking over his/her lesson packages. A super admin role was able to access lesson packages of all E.C.</li>\r        <li>It was well integrated with other online services and our own internal tools so that important info was centralized, and frequent actions were easy to perform.</li>\r    </ul>\r    </p>\r</section>\r<section>\r    <h3>Wireframes and Think-Alouds</h3>\r    <img src="/uploads/admin_panoramic_wireframes.jpg">\r    <p>\r    Before I jumped into code, I made wireframes and clickable prototypes, and used Think-Alouds to evaluate the design with our Education Consultants. The iterative process helped prioritize features and organize the presentation of information.\r    </p>\r</section>\r<section>\r    <h3>Implementation</h3>\r    <p>\r    Panoramic Admin Panel was a JavaScript intensive application. I used <strong>AngularJS</strong> as the front-end MVW framework, and designed the app in an <strong>Object-Oriented</strong> approach. Tutorspree's alpha version <strong>minisync</strong> library was used to sync the front-end data with the back-end.\r    </p>\r</section>\r<section>\r    <h3>Next Version</h3>\r    <p>\r    One of the major features in the next version was <strong>configurable lesson package groups</strong>. We should be able to define an arbitrary group of lesson packages by specifying information to be displayed, actions, Education Consultants allowed to access, etc in a config file. It should be dynamic, and should be flexible. A few more features were also discussed within the team.\r    </p>\r</section>				panoramic-admin-panel	2013-08-28 02:36:14.467817	2013-08-28 02:36:14.467836	2013-08-28 02:36:14.467842
+\.
+
+
+--
+-- TOC entry 2358 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('post_id_seq', 24, true);
+
+
+--
+-- TOC entry 2335 (class 0 OID 19987)
+-- Dependencies: 188
+-- Data for Name: post_taxonomy_term; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY post_taxonomy_term (id, post_id, term_id, taxonomy_id, created) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2359 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: post_taxonomy_term_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('post_taxonomy_term_id_seq', 1, false);
+
+
+--
+-- TOC entry 2322 (class 0 OID 19863)
+-- Dependencies: 175
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY role (id, role_name, created) FROM stdin;
+1	admin	2013-08-27 02:07:17.807048
+\.
+
+
+--
+-- TOC entry 2360 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('role_id_seq', 1, true);
+
+
+--
+-- TOC entry 2320 (class 0 OID 19853)
+-- Dependencies: 173
+-- Data for Name: taxonomy; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY taxonomy (id, name, created) FROM stdin;
+1	tag	2013-08-27 02:07:17.827851
+2	category	2013-08-27 02:07:17.831176
+\.
+
+
+--
+-- TOC entry 2361 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: taxonomy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('taxonomy_id_seq', 2, true);
+
+
+--
+-- TOC entry 2325 (class 0 OID 19889)
+-- Dependencies: 178
+-- Data for Name: taxonomy_term; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY taxonomy_term (term_id, taxonomy_id, description, parent_id, created) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2316 (class 0 OID 19832)
+-- Dependencies: 169
+-- Data for Name: term; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY term (id, name, slug, created) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2362 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: term_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('term_id_seq', 1, false);
+
+
+--
+-- TOC entry 2324 (class 0 OID 19873)
+-- Dependencies: 177
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY "user" (id, usercred_id, first_name, last_name, display_name, phone_number, image_url, last_login, created, last_updated) FROM stdin;
+1	1	Chung-Yi	Chi	Chung-Yi C	\N	http://www.gravatar.com/avatar/HASH?d=identicon	2013-08-27 02:07:17.798395	2013-08-27 02:07:17.79841	2013-08-27 02:07:17.798417
+\.
+
+
+--
+-- TOC entry 2363 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('user_id_seq', 1, true);
+
+
+--
+-- TOC entry 2327 (class 0 OID 19909)
+-- Dependencies: 180
+-- Data for Name: user_role; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY user_role (id, user_id, role_id, created) FROM stdin;
+1	1	1	2013-08-27 02:07:17.823825
+\.
+
+
+--
+-- TOC entry 2364 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('user_role_id_seq', 1, true);
+
+
+--
+-- TOC entry 2318 (class 0 OID 19844)
+-- Dependencies: 171
+-- Data for Name: usercred; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY usercred (id, email, created, last_updated) FROM stdin;
+1	cychi1210@gmail.com	2013-08-27 02:07:17.794907	2013-08-27 02:07:17.794925
+\.
+
+
+--
+-- TOC entry 2365 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: usercred_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('usercred_id_seq', 1, true);
+
+
+--
+-- TOC entry 2329 (class 0 OID 19927)
+-- Dependencies: 182
+-- Data for Name: userpasswd; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY userpasswd (id, user_id, password, created, last_updated) FROM stdin;
+1	1	$2a$12$KGtOGBGyqGNkuxwLnUsueuIW6bXjOqATr.9uksE4fdR.Oq18VQdLG	2013-08-27 02:07:17.80156	2013-08-27 02:07:17.801575
+\.
+
+
+--
+-- TOC entry 2366 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: userpasswd_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('userpasswd_id_seq', 1, true);
+
+
+--
+-- TOC entry 2337 (class 0 OID 20005)
+-- Dependencies: 190
+-- Data for Name: work; Type: TABLE DATA; Schema: public; Owner: star_admin
+--
+
+COPY work (id, post_id, subtitle, summary, cover_image_url, meta_data, created, published, last_updated) FROM stdin;
+1	1	Rigid Body Siulation	Motivated by the monotonous interaction methods of normal rigid body simulation (i.e. bowling and billiards games that use static scenes and movable objects to simulate real-world physical phenomena), the 3D Pinball is a three-dimensional interactive game that emphasizes on direct interaction among objects and the scene. Instead of controlling the ball, users directly manipulate the scene (e.g. rotate, shift, and spin the scene) to interact with the ball and aim to let the ball reach the destination. To simulate the physical phenomena (e.g. gravity, collision, and friction), we applied Linear Complementary Problem (LCP) model and collision detection techniques. To strength the playability and the reality, several features were implemented in the game, including the flexibility of arranging the scene, shadow, texture mapping, and sound effects.	/uploads/3dpinball.jpg		2013-08-27 02:07:55.179741	2013-08-27 02:07:55.179757	2013-08-27 02:07:55.179764
+2	2	Software Design Patterns	HySpe is an integrated real-time message notification system. It aims to integrate mainstream information services (e.g. E-mail, RSS, and social media web sites) and provide a real-time notification services when new information is created. Therefore, users will not miss important messages. The implementation focused on the design of the software architecture so that the system has the flexibility to adapt itself to quickly-evolving information technology. Design Patterns were applied in the object-oriented system to achieve the goal.	/uploads/hyspe.jpg		2013-08-27 02:08:33.663905	2013-08-27 02:08:33.663928	2013-08-27 02:08:33.663938
+3	3	A Real-time Expert Recommender System	With the popularity of Internet access, posting a question on the Internet (e.g. online forums or Yahoo! Answers) became a new trend for seeking information and solving questions. However, lack of efficiency (i.e. the question might wait for several days to be fully answered) and the expertise of answerers (i.e. answerers with insufficient knowledge might give wrong answers) are two major impediments to situations with limited time and professional knowledge requirements. On top of social media web sites, Expert Recommender aimed to help askers find answerers with sufficient expertise and high willingness in real time. The system was built on the PTT Bulletin Board System* and applied content-based filtering and collaborative filtering on the data to provide recommendation. Askers simply post their questions on a BBS board, and the system will automatically locate experts and forward the questions to them. Then they can communicate with the instant messaging system.\r\n\r\n*PTT Bulletin Board System (PTT, 批踢踢實業坊, telnet://ptt.cc) is a terminal-based bulletin board system based in Taiwan. It is arguably the largest BBS in the world with more than 1.5 million registered.	/uploads/expert_recommender.jpg		2013-08-27 02:09:21.158516	2013-08-27 02:09:21.158533	2013-08-27 02:09:21.158539
+4	4	A Baby Self-education Platform	C. John Sommerville said, “Quintilian thought that the earliest years of the child’s life were crucial. Education should start earlier than age seven, within the family.” Motivated by the fact that infants are curious about their living environment, we often asked ourselves the question “Is it possible to make kids educate themselves when they interact with the living environment?” We proposed the Baby Bear’s Adventure (BBA) system, a baby self-education platform, for children. With advanced wireless transmission technology combined with an expert system, BBA provides three major functionalities: (1) Self-learning: to have children to learn by themselves while interacting with the living environment, (2) Virtual teacher: to have a “Virtual teacher” with children anytime and anywhere, and (3) Interest inspiration: to provide custom education to children according to their interest.\r\n\r\nThe system won the 1st place of Microsoft Imagine Cup 2007 in Taiwan region, and became the regional representative to attend the world final game in Korea.	/uploads/bba.jpg		2013-08-27 02:10:22.29342	2013-08-27 02:10:22.293436	2013-08-27 02:10:22.293443
+5	5	A Baby Self-education Platform	The name “Drawing Whispers” originates from the game “Chinese Whispers”. Instead of passing a phrase or sentence, it is a drawing version. A player will be given a reference drawing, based on which he/she is expected to draw a new picture according to his/her own interpretation. Then the new picture will be passed on to subsequent players, with which they can also develop their own drawings. We present all the pictures on our web page and we find that there are significant differences between two contiguous drawings. In fact, it is often the case that the resulting drawing conveys something completely different from the original drawing.\r\n\r\nThis work aims to explore the following issues: (1) Information distortion on the Internet. Internet users have long had the habit of receiving and, in some cases, accepting false or distorted information propagated via the Internet. (2) Irresponsible postings. Due to the anonymity of Internet postings, users are encouraged to post anything. In fact, vandalizing or fallacious postings may become ubiquitous because the authors are not held accountable. (3) Interpretation or cultural differences. We choose drawings over writings because they emphasize the differences in interpretation between individuals. We also logged the IP addresses of users to investigate the differences in interpretation and presentation between individuals of different cultures.\r\n\r\nThe work “Drawing Whispers” won the Technological Award in K.T. Creativity Award 2008, and went on to be exhibited in the Digital Art Festival 2008 in Taipei.	/uploads/drawing_whispers.jpg		2013-08-27 02:11:54.789346	2013-08-27 02:11:54.789369	2013-08-27 02:11:54.789394
+6	6	A Personalized Automatic Playlist Recommender	The digitization and online distribution of music content in the Internet era have led to an enormous volume of accessible digital music and diversified the ways with which consumers explore music. In particular, an emerging trend in music exploration is to organize and to search songs according to song emotions. However, research on Automatic Playlist Generation (APG) primarily focuses on leveraging traditional metadata and audio similarity for recommendation. Moreover, Mainstream solutions view APG as a static problem. This thesis argues that the APG problem is better modeled as a continuous optimization problem, and proposes an adaptive preference model for personalized APG based on emotions. The main idea is to collect a user’s behavior in music playing (e.g. rating, skipping and replaying) as immediate feedback in learning the user’s preferences for music emotion within a playlist.	/uploads/meonplay.jpg		2013-08-27 02:12:39.705208	2013-08-27 02:12:39.705229	2013-08-27 02:12:39.705239
+7	7	Enhancing Music Mood Estimation with Textual Input of Lyrics	Music mood estimation (MME) is a key technology in mood-based music recommendation. While mainstream MME research nowadays relies on audio music analysis, exploring the significance of lyrics text in predicting song emotion is gaining attention in recent years. In this paper, we compiled a dataset of pop songs with corresponding mood ratings from participants. We then applied statistical analysis to estimate how lyrics text and audio contribute to a song’s overall valence-arousal (V-A) mood ratings. Furthermore, we constructed a MME system to validate the statement acquired by the statistical analysis.\r\n\r\nThis paper was published in ACII2009, and presented by me in the poster session of ACII2009 in Amsterdam.	/uploads/the_power_of_words.jpg		2013-08-27 02:14:21.864753	2013-08-27 02:14:21.864768	2013-08-27 02:14:21.864774
+8	8		JIS is a project which aims to inspect and improve the current Automatic Ticket Issuing Machine (ATIM) system of Taiwan High Speed Rail Corporation (THSRC). The issue focuses on “how to facilitate normal business people to more conveniently and easily purchase tickets with the ATIM system of THSRC.” The target user group is 20-50 year-old normal business people without other physical constraints.\r\n\r\nThe JIS project focuses on the feasibility, e.g. existing large user base and physical touch screen constraints, and points out several critical issues and recommendations. During the whole design process, we follow five milestones to develop the redesign: (1) Users and Requirements: survey and user requirements collection, (2) Observation: user behavior and experience observation, (3) Low-fidelity Prototyping: paper prototyping for preliminary testing and user feedback, (4) High-fidelity Prototyping: more realistic prototyping implementing our redesign, and (5) Evaluation: User testing and evaluation.	/uploads/thsrc_vendeing_machine_ui_redesign.jpg		2013-08-27 02:15:45.361146	2013-08-27 02:15:45.361174	2013-08-27 02:15:45.361185
+9	9		A poster using warm color in 2010. This work aims to use color to bolster the typographic hierarchy, and to help readers to navigate quantities of information. I use warm color text and blocks as well as circles at the background to convey and highlight the warm/educational nature of the musical play.	/uploads/color_poster.jpg		2013-08-27 02:16:25.107484	2013-08-27 02:16:25.107501	2013-08-27 02:16:25.107508
+10	10	Brochure Graphic Design	A four-page Aeron Chairs Brochure in 2010, including a front cover, a 2-page inside spread, and a back cover. This work establishes and uses a grid and other page elements to create the brochure. In order to tell the full story about the product, several levels of information are quired. Hence, interesting challenges include typesetting, signaling, sequence of content, and placement on the page.	/uploads/aeron_chairs.jpg		2013-08-27 02:17:09.711351	2013-08-27 02:17:09.711369	2013-08-27 02:17:09.711375
+11	11	Graphic Design	My design of interpreting voice and text as image in 2010. This work aims to use font types (without color) to enhance the meaning of a quote/word. I use several type elements to design the creative relationship between the quote/word and its meaning, including pixelation, size differences, rotation, skewing, etc.	/uploads/typography.jpg		2013-08-27 02:17:51.876326	2013-08-27 02:17:51.876342	2013-08-27 02:17:51.876348
+12	12	Graphic Design	An information visualization poster in 2010. This work aims to visualize personal carbon footprint, and encourage people to change lifestyle via visual comparison. In addition to traditional bar chart, I use different size of ink drops as a visual metaphor to emphasize the severity of current lifestyle in comparison with world target of carbon footprint. The bright color palette used intends to provide energy for taking an action.	/uploads/carbon_footprint.jpg		2013-08-27 02:18:26.364466	2013-08-27 02:18:26.364482	2013-08-27 02:18:26.364487
+13	13	Android App	WorkoutDJ is an Android mobile application that brings music and workout together and supports intelligent exercise management as well as enjoyable workout experience.\r\n\r\nThe WorkoutDJ application provides three primary features: (1) intelligent music player: plays appropriate songs based on user’s exercise status, (2) personalized workout trainer: plans and recommends user’s workout schedule, and (3) smart progress tracker: keep track of exercise progress, analyzes it, and visualizes historical and analytical information.\r\n\r\nTo enhance the user-computer interaction, we adopted usability and design guidelines from Donald Norman’s well-known book, “Design of everyday things”, including visual affordance, conceptual model, mapping, and feedback.	/uploads/workoutdj.jpg		2013-08-27 02:19:05.655724	2013-08-27 02:19:05.655747	2013-08-27 02:19:05.655756
+14	14	Graphic Design	My design of an entree recipe book in 2010. It is organized into sections of different countries, and contains 10 recipes, a cover, a table of content, and divider pages. To successfully communicate information to readers, this work aim to develop a system that includes the following elements: theme concept, editorial style, typography, grid, color palette, image use, and pacing.	/uploads/recipe_book.jpg		2013-08-27 02:19:45.505827	2013-08-27 02:19:45.505841	2013-08-27 02:19:45.505847
+15	15	Interaction Design	Current light switches lack of affordance when there are too many lights to control in a room, such as a large classroom and a conference room. The trade-off between flexibility and intuitiveness becomes an issue when designing better light switches.\r\n\r\nThe redesign is comprised of three primary features: (1) Use layout of the room as background to reveal the mapping between light and the light switch controlling it. (2) Rotate the map to the correct orientation that matches user’s mental model. (3) Use small LED light instead of text to inform the status of the light.	/uploads/easy_light_switch.jpg		2013-08-27 02:20:29.307041	2013-08-27 02:20:29.307063	2013-08-27 02:20:29.30707
+16	16	Mobile App Design	WalkSocial is an iPhone app that connects retirees to their community of walkers by enabling location-based encounters with friends and fellow walkers in a mobile and secure way.\r\n\r\nOne thing we noticed through out customer research was that they really like two things: taking walks and talking to people. We chose to focus on recent retirees and develop an app that helps these individuals connect and build communities.	/uploads/walksocial.jpg		2013-08-27 02:21:10.789323	2013-08-27 02:21:10.78934	2013-08-27 02:21:10.789346
+17	17	Interaction Design	HealthMonth+ combines cooperative and competitive game mechanics with the knowledge of human behavior and motivation. Sometimes we need a little encouragement from our friends. HealthMonth+ leverages the social encouragement provided by competition and friends holding friends accountable provides.\r\n\r\nHealth Month, a game originally designed by Buster, already incorporated many fundamentals of game mechanics to help encourage players to achieve their goals. However the site’s navigation and design made it hard to figure out the game and some of the game’s best motivating elements could easily be missed. HealthMonth+ is a redesign that makes it easier to get started getting healthy one month at a time.	/uploads/healthmonthplus.jpg		2013-08-27 02:22:00.821309	2013-08-27 02:22:00.821323	2013-08-27 02:22:00.821329
+18	18	Interaction Design	The Story Wand gives audible life to artifacts in the world, allowing you to add sound effects to arbitrary objects, capture a game of make-believe, or record longer-form stories or thoughts for later retrieval and reflection.\r\n\r\nChildren are precious. While the days of childhood may drag, the years are gone before you know it. Often it seems as if a child’s world is no more tied to reality than their shoes are to their feet. We wanted to extend the ability of children to see a daydream in their living rooms, and give parents a chance to capture those moments when a couch is not just a couch.\r\n\r\nSince the participant information is private, I am not permitted to present relevant information here.	/uploads/story_wand.jpg		2013-08-27 02:23:33.149662	2013-08-27 02:23:33.149686	2013-08-27 02:23:33.149695
+19	19	TransForming the Paper Form	Cardiology staff can benefit from more tightly integrated patient data input protocols. The collection of patient data is currently cumbersome and inefficient. With the implementation of the TransForm iPad application, patient data can be collected and shared more effectively.\r\n\r\nOur tool meets these five design goals: (1) Satisfaction: New technology is more fun to use, (2) Efficiency: Data synchronization improves accessibility, (3) Intuitiveness: Standard UI components and interactions are easy to use, (4) Patient Dedication: Patient-centric design puts patients first, and (5) Accuracy: Error-checking capabilities and back-end data syncing improve accuracy\r\n\r\nIn addition, TransForm’s flexibility can support hospitals in complying with JCAHO regulations.\r\n\r\nBecause the project information is confidential, I cannot present the detail information.	/uploads/transform_app.jpg		2013-08-27 02:24:46.389025	2013-08-27 02:24:46.389047	2013-08-27 02:24:46.389057
+20	20	Breaking through the Blockage: Improving Cardiology Workflow	Smooth, efficient workflow is paramount to the successful functioning of any hospital. This is particularly relevant to cardiology, which is comprised of a handful of unique, yet related modalities. Tightly coupled with each modality is significant patient data that must be collected, shared, logged, and interpreted. Large quantities of data are often cumbersome, and may challenge workflow processes pre-, peri- and post-procedure.\r\n\r\nOur interdisciplinary team of four Carnegie Mellon Master of Human-Computer Interaction (MHCI) students, sponsored by an international healthcare IT and device company, has been tasked to design, develop, and evaluate a tool to improve patient data input processes, before, during and/or after procedures.	/uploads/transform.jpg		2013-08-27 02:26:45.868423	2013-08-27 02:26:45.868439	2013-08-27 02:26:45.868445
+22	22	Keep Improving Conversions	In Tutorspree, we kept improving conversion rates through A/B testing. We believed that a good leverage of A/B testing could have significant and surprising improvement besides good user exeprience design.\r\rWe used A/B testing to set up experiments for various goals, such as decreasing drop-off rates from a certain page, and increasing conversion rates (e.g. submitting a form, clicking a button, etc.) Different design elements were used to make variations, including copy text, images, layouts, colors, call-to-action (CTA) text.	/uploads/ab-testing.jpg		2013-08-27 23:35:23.102535	2013-08-27 23:35:23.102553	2013-08-27 23:35:23.102565
+21	21	The Second Coming of Education	With the mission of "making learning personal", Tutorspree redesigned the entire website and launched the second version of the site in Jun 2013. Through better visual communication with users and intuitive user experience (UX), we aimed to deliver high-quality personal learning services to our customers. The front-end redesign of the site is one primary step to achieve the goal. \r\n\r\nIn this project, I was the lead of the Tutorspree team and collaborated with a design firm and freelancers to revamp the entire Tutorspree website, from mood board inspiration and wireframes to front-end development and back-end integration.	/uploads/tutorspree_website_redesign.png		2013-08-28 04:36:18.871756	2013-08-28 04:36:18.871756	2013-08-28 04:36:18.871756
+24	24	Applying HCI Methods to Observe and Identify Design Directions	Tutorspree Education Consultant's workflow was not optimized and could be improved on a higher level. I applied HCI methods, including Contexual Inquiry (CI), Contextual Design (CD), Think-Alouds, etc, to observe the workflow, illustrate it in diagrams, highlight breakdowns, and identify design directions in order to streamline the process.	/uploads/cover_streamline_sales_workflow.jpg		2013-08-28 03:16:31.976755	2013-08-28 03:16:31.97677	2013-08-28 03:16:31.976776
+23	23	A Panoramic View Admin Panel to Streamline Lesson Package Management	Panoramic Admin Panel was an internal tool for Tutorspree Education Consultants (E.C.) to manage lesson packages of their clients. Its goal was to have a unified bird's-eye view of lesson packages for each E.C., and to display relevant information/remiders/alerts, and to allow E.C.s to easily manage each lesson package thourghout its lifecycle.	/uploads/cover_admin_panoramic.jpg		2013-08-28 02:36:15.421388	2013-08-28 02:36:15.421403	2013-08-28 02:36:15.421409
+\.
+
+
+--
+-- TOC entry 2367 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: work_id_seq; Type: SEQUENCE SET; Schema: public; Owner: star_admin
+--
+
+SELECT pg_catalog.setval('work_id_seq', 24, true);
+
+
+--
+-- TOC entry 2295 (class 2606 OID 19969)
+-- Name: comment_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2293 (class 2606 OID 19953)
+-- Name: post_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY post
+    ADD CONSTRAINT post_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2297 (class 2606 OID 19992)
+-- Name: post_taxonomy_term_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY post_taxonomy_term
+    ADD CONSTRAINT post_taxonomy_term_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2277 (class 2606 OID 19868)
+-- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY role
+    ADD CONSTRAINT role_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2279 (class 2606 OID 19870)
+-- Name: role_role_name_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY role
+    ADD CONSTRAINT role_role_name_key UNIQUE (role_name);
+
+
+--
+-- TOC entry 2273 (class 2606 OID 19860)
+-- Name: taxonomy_name_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY taxonomy
+    ADD CONSTRAINT taxonomy_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 2275 (class 2606 OID 19858)
+-- Name: taxonomy_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY taxonomy
+    ADD CONSTRAINT taxonomy_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2285 (class 2606 OID 19896)
+-- Name: taxonomy_term_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY taxonomy_term
+    ADD CONSTRAINT taxonomy_term_pkey PRIMARY KEY (term_id, taxonomy_id);
+
+
+--
+-- TOC entry 2264 (class 2606 OID 19839)
+-- Name: term_name_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY term
+    ADD CONSTRAINT term_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 2266 (class 2606 OID 19837)
+-- Name: term_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY term
+    ADD CONSTRAINT term_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2268 (class 2606 OID 19841)
+-- Name: term_slug_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY term
+    ADD CONSTRAINT term_slug_key UNIQUE (slug);
+
+
+--
+-- TOC entry 2281 (class 2606 OID 19881)
+-- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2287 (class 2606 OID 19914)
+-- Name: user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY user_role
+    ADD CONSTRAINT user_role_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2283 (class 2606 OID 19883)
+-- Name: user_usercred_id_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_usercred_id_key UNIQUE (usercred_id);
+
+
+--
+-- TOC entry 2271 (class 2606 OID 19849)
+-- Name: usercred_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY usercred
+    ADD CONSTRAINT usercred_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2289 (class 2606 OID 19935)
+-- Name: userpasswd_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY userpasswd
+    ADD CONSTRAINT userpasswd_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2291 (class 2606 OID 19937)
+-- Name: userpasswd_user_id_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY userpasswd
+    ADD CONSTRAINT userpasswd_user_id_key UNIQUE (user_id);
+
+
+--
+-- TOC entry 2299 (class 2606 OID 20013)
+-- Name: work_pkey; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY work
+    ADD CONSTRAINT work_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2301 (class 2606 OID 20015)
+-- Name: work_post_id_key; Type: CONSTRAINT; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+ALTER TABLE ONLY work
+    ADD CONSTRAINT work_post_id_key UNIQUE (post_id);
+
+
+--
+-- TOC entry 2269 (class 1259 OID 19850)
+-- Name: ix_usercred_email; Type: INDEX; Schema: public; Owner: star_admin; Tablespace: 
+--
+
+CREATE UNIQUE INDEX ix_usercred_email ON usercred USING btree (email);
+
+
+--
+-- TOC entry 2310 (class 2606 OID 19975)
+-- Name: comment_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES comment(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2309 (class 2606 OID 19970)
+-- Name: comment_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_post_id_fkey FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2311 (class 2606 OID 19980)
+-- Name: comment_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_user_id_fkey FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2308 (class 2606 OID 19954)
+-- Name: post_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY post
+    ADD CONSTRAINT post_author_id_fkey FOREIGN KEY (author_id) REFERENCES "user"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2313 (class 2606 OID 19998)
+-- Name: post_taxonomy_term_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY post_taxonomy_term
+    ADD CONSTRAINT post_taxonomy_term_post_id_fkey FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2312 (class 2606 OID 19993)
+-- Name: post_taxonomy_term_term_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY post_taxonomy_term
+    ADD CONSTRAINT post_taxonomy_term_term_id_fkey FOREIGN KEY (term_id, taxonomy_id) REFERENCES taxonomy_term(term_id, taxonomy_id);
+
+
+--
+-- TOC entry 2304 (class 2606 OID 19902)
+-- Name: taxonomy_term_taxonomy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY taxonomy_term
+    ADD CONSTRAINT taxonomy_term_taxonomy_id_fkey FOREIGN KEY (taxonomy_id) REFERENCES taxonomy(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2303 (class 2606 OID 19897)
+-- Name: taxonomy_term_term_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY taxonomy_term
+    ADD CONSTRAINT taxonomy_term_term_id_fkey FOREIGN KEY (term_id) REFERENCES term(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2306 (class 2606 OID 19920)
+-- Name: user_role_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY user_role
+    ADD CONSTRAINT user_role_role_id_fkey FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2305 (class 2606 OID 19915)
+-- Name: user_role_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY user_role
+    ADD CONSTRAINT user_role_user_id_fkey FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2302 (class 2606 OID 19884)
+-- Name: user_usercred_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_usercred_id_fkey FOREIGN KEY (usercred_id) REFERENCES usercred(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2307 (class 2606 OID 19938)
+-- Name: userpasswd_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY userpasswd
+    ADD CONSTRAINT userpasswd_user_id_fkey FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2314 (class 2606 OID 20016)
+-- Name: work_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: star_admin
+--
+
+ALTER TABLE ONLY work
+    ADD CONSTRAINT work_post_id_fkey FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE DEFERRABLE;
+
+
+--
+-- TOC entry 2344 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: starsirius
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM starsirius;
+GRANT ALL ON SCHEMA public TO starsirius;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-08-28 12:07:37 EDT
+
+--
+-- PostgreSQL database dump complete
+--
+

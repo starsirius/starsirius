@@ -10,6 +10,3 @@
     <!-- End of client compilation of css -->
 
     <script src="/static/js/vendor/modernizr-2.6.2.min.js"></script>
-
-    <!-- Google fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>

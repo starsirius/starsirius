@@ -1,2 +1,2 @@
 #
-__all__ = ["user", "taxonomy"]
+__all__ = ["user", "taxonomy", "post", "comment"]

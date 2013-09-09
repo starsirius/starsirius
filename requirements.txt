@@ -1,4 +1,4 @@
-Flask==0.9
+Flask==0.10.1
 Flask-Script
 Flask-SQLAlchemy
 Flask-Bcrypt
